@@ -1,12 +1,15 @@
-n = int(input())
+m = int(input())
 
-def gen(n):
-    
-    start = max(0, n - len(str(n)) * 9)    
-    for i in range(start, n):
-        digit_sum = sum(int(char) for char in str(i))
-        if i + digit_sum == n:
-            return i
-    return 0
+start = max(0, m - (9 * len(str(m))))
 
-print(gen(n))
+for num in range(start, m):
+  digits = list(map(int, str(num)))
+  total = num
+  for i in range(len(digits)):
+    total += digits[i]
+
+  if total == m:
+    print(num)
+    break
+else:
+  print(0)
