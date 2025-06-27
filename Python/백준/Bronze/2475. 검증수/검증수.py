@@ -1,3 +1,3 @@
-A = list(map(int, input().split()))
+a, b, c, d, e = map(int, input().split())
 
-print(sum(a**2 for a in A)%10)
+print((a*a + b*b + c*c + d*d + e*e)%10)
