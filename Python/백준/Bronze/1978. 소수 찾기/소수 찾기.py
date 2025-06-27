@@ -1,22 +1,16 @@
-def is_prime(n):
-    """Check if a number is a prime using trial division."""
-    if n <= 1:
-        return False
-    if n <= 3:
-        return True
-    if n % 2 == 0 or n % 3 == 0:
-        return False
-    i = 5
-    while i * i <= n:
-        if n % i == 0 or n % (i + 2) == 0:
-            return False
-        i += 6
-    return True
-
 n = int(input())
-
 A = list(map(int, input().split()))
+count = 0
 
-B = [a for a in A if is_prime(a)]
+for num in A:
+    if num < 2:
+        continue
+    is_prime = True
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            is_prime = False
+            break
+    if is_prime:
+        count += 1
 
-print(len(B))
+print(count)
