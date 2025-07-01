@@ -5,4 +5,4 @@ c = a + b
 quotient = c // 8
 remainder = c % 8
 
-print(f"{quotient}\n{remainder}")
+print(quotient, remainder, sep='\n')
