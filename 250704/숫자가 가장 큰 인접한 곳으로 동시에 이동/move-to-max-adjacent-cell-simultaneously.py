@@ -1,4 +1,4 @@
-from collections import Counter
+# from collections import Counter
 
 # N 격자, M 구슬 갯수, T 시간 
 n, m, t = map(int, input().split())
@@ -43,10 +43,10 @@ def check_duplicate(marbles):
 
 # 중복 제거
 def delete_duplicate(marbles):
-    # is_duplicate = check_duplicate(marbles)
-    # return [marbles[i] for i in range(len(marbles)) if not is_duplicate[i]]
-    count = Counter(marbles)
-    return [pos for pos in marbles if count[pos] == 1]
+    is_duplicate = check_duplicate(marbles)
+    return [marbles[i] for i in range(len(marbles)) if not is_duplicate[i]]
+    # count = Counter(marbles)
+    # return [pos for pos in marbles if count[pos] == 1]
 
 # 시뮬레이션 T초 진행
 for _ in range(t):
