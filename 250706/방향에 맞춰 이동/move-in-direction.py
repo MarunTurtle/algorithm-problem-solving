@@ -1,23 +1,16 @@
 n = int(input())
-x, y = 0, 0 
+moves = [tuple(input().split()) for _ in range(n)]
+dir = [move[0] for move in moves]
+dist = [int(move[1]) for move in moves]
 
-dx = [1, -1, 0, 0]
-dy = [0, 0, -1, 1]
+# Please write your code here.
+x, y, = 0, 0
+dxys = {"S": (0, -1), "N": (0, 1),  "W": (-1, 0), "E": (1, 0)}
 
-for _ in range(n):
-    c_dir, dist = tuple(input().split())
-    dist = int(dist)
-
-    if c_dir == 'E':
-        move_dir = 0
-    elif c_dir == "W":
-        move_dir = 1
-    elif c_dir == "S":
-        move_dir = 2
-    elif c_dir == "N":
-        move_dir = 3
-
-    x += dx[move_dir] * dist
-    y += dy[move_dir] * dist
+for i in range(n):
+    for j in range(dist[i]):
+        dx, dy = dxys[dir[i]]
+        x += dx
+        y += dy
 
 print(x, y)
