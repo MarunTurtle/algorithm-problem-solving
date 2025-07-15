@@ -1,1 +1,2 @@
 c = input()
+print(c)
