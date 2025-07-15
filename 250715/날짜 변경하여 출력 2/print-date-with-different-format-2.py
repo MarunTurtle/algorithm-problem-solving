@@ -1,3 +1,3 @@
-y, m, d = map(int, input().split("-"))
+d, m, y = map(int, input().split("-"))
 
 print(f"{y}.{m}.{d}")
