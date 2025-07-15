@@ -1,3 +1,5 @@
 a, b = map(int, input().split())
 
-print a if a > b else b
+c = a if a > b else b
+
+print(c)
