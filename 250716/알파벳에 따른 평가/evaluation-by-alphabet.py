@@ -9,6 +9,6 @@ elif l == "B":
 elif l == "C":
     print("Usually")
 elif l == "D":
-    print("Effor")
+    print("Effort")
 else:
     print("Failure")
