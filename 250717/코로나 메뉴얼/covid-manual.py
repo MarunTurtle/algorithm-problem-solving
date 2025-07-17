@@ -11,7 +11,7 @@ cnt = 0
 patients = [[s1, t1], [s2, t2], [s3, t3]]
 
 for patient in patients:
-    if patient[0] >= 37 and patient[1] == 'Y':
+    if patient[1] >= 37 and patient[0] == 'Y':
         cnt += 1
 
 if cnt >= 2:
