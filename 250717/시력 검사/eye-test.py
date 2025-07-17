@@ -6,4 +6,4 @@ if a >= 1.0 and b >= 1.0:
 elif a < 0.5 or b < 0.5:
     print('Low')
 else:
-    print('Mid')
+    print('Middle')
