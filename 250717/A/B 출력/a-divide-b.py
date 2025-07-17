@@ -1,4 +1,10 @@
 a, b = map(int, input().split())
 
-print(f"{float(a/b):.21f})
+print(f"{a//b}.", end="")
 
+a %= b
+
+for _ in range(20):
+    a *= 10
+    print(a // b, end="")
+    a %= b
