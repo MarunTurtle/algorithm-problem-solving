@@ -6,6 +6,8 @@ t1 = int(t1)
 t2 = int(t2)
 t3 = int(t3)
 
+cnt = 0
+
 patients = [[s1, t1], [s2, t2], [s3, t3]]
 
 for patient in patients:
