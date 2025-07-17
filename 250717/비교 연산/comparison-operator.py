@@ -1,4 +1,4 @@
-a, b = map(int, input())
+a, b = map(int, input().split())
 
 print(int(a>=b))
 print(int(a>b))
