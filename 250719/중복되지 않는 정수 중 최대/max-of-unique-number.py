@@ -4,7 +4,7 @@ nums = list(map(int, input().split()))
 # Please write your code here.
 max_num = -1
 
-for i in range(1, n):
+for i in range(0, n):
     if nums.count(nums[i]) > 1:
         continue
     if nums[i] > max_num:
