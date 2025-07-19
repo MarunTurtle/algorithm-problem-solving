@@ -1,3 +1,5 @@
+import sys
+
 input_str = input()
 target_str = input()
 
@@ -10,8 +12,7 @@ for i in range(input_len - target_len + 1):
     if input_str[i:i+target_len] == target_str:
         idx = i
         print(i)
-        break
+        sys.exit(0)
 
-if idx == -1:
-    print(idx)
+print(idx)
 
