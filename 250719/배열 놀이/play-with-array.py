@@ -8,7 +8,10 @@ for i in range(q):
     if com[0] == 1:
         print(nums[com[1]-1])
     elif com[0] == 2:
-        print(nums.index(com[1])+1)
+        if com[1] in nums:
+            print(nums.index(com[1])+1)
+        else:
+            print(0)
     else:
         for j in range(com[1]-1, com[2]):
             print(nums[j], end=" ")
