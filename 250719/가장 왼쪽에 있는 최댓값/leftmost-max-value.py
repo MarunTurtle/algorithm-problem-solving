@@ -1,15 +1,19 @@
+# 변수 선언 및 입력
 n = int(input())
-a = [0] + list(map(int, input().split()))
+a = list(map(int, input().split()))
 
-# Please write your code here.
-max_idx = n + 1
-max_val = 0
+prev_max_idx = n
 
-while max_idx != 1:
-    max_val = 0
-    for i in range(1, max_idx):
-        if a[i] > max_val:
-            max_val = a[i]
+while True:
+    max_idx = 0
+
+    for i in range(1, prev_max_idx):
+        if a[i] > a[max_idx]:
             max_idx = i
-    print(max_idx, end=" ")
 
+    print(max_idx + 1, end=" ")
+
+    if max_idx == 0:
+        break
+
+    prev_max_idx = max_idx
