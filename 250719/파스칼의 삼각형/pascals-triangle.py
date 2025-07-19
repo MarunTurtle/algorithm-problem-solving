@@ -1,13 +1,10 @@
 n = int(input())
 
-ans = [[0 for _ in range(n)] for _ in range(n)]
+ans = [[1] * i for i in range(1, n+1)]
 
-for r in range(n):
-    for c in range(r + 1):
-        if c == 0 or c == r:
-            ans[r][c] = 1
-            print(f"{ans[r][c]}", end=" ")
-        else:
-            ans[r][c] = ans[r-1][c] + ans[r-1][c-1]
-            print(f"{ans[r][c]}", end=" ")
-    print()
+for r in range(1, n):
+    for c in range(1, r):
+        ans[r][c] = ans[r-1][c] + ans[r-1][c-1]
+
+for row in ans:
+    print(*row)
