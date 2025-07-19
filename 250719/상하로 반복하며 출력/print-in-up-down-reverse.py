@@ -11,7 +11,7 @@ for j in range(n):
         else:
             grid[i][j] = n + 1 - cnt
         if cnt == n:
-                cnt = 1
+            cnt = 1
         else:
             cnt += 1
 
