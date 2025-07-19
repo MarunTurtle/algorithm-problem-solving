@@ -10,11 +10,12 @@ def push(source):
     return source[-1] + source[0:-1]
 
 def flip(source):
-    new_source = list(source)
-    for i in range(len(source)):
+    for i in range(len(source) // 2):
         source = list(source)
-        new_source[i] = source[len(source)-1-i]
-    return ''.join(new_source)
+        temp = source[i]
+        source[i] = source[len(source)-1-i]
+        source[len(source)-1-i] = temp
+    return ''.join(source)
 
 for query in queries:
     if query == 1:
