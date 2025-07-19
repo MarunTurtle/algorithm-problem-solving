@@ -1,13 +1,20 @@
 A = input()
 B = input()
 
-pattern_exists = True
+def find(source, target):
+    for i in range(len(source) - len(target) + 1):
+        if source[i:i+len(target)] == target:
+            return i
+    return -1
 
-while pattern_exists:
-    pattern_exists = False
-    for i in range(len(A) - len(B) + 1):
-        if A[i:i + len(B)] == B:
-            A = A[0:i] + A[i + len(B):]
-            pattern_exists = True
-            break
+def erase(source, pos, length):
+    return source[0:pos] + source[pos+length:]
+
+while True:
+    pos = find(A, B)
+    if pos == -1:
+        break
+    else:
+        A = erase(A, pos, len(B))
+
 print(A)
