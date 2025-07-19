@@ -4,10 +4,15 @@ b = list(map(int, input().split()))
 
 is_part = False
 
-for i in range(n - m):
-    if a[i:i+m] == b:
+if n > m:
+    for i in range(n - m):
+        if a[i:i+m] == b:
+            is_part = True
+            break
+else:
+    if a == b:
         is_part = True
-        break
+
 
 if is_part:
     print('Yes')
