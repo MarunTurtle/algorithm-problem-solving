@@ -9,13 +9,8 @@ def pull(source):
 def push(source):
     return source[-1] + source[0:-1]
 
-def flip(source):
-    for i in range(len(source) // 2):
-        source = list(source)
-        temp = source[i]
-        source[i] = source[len(source)-1-i]
-        source[len(source)-1-i] = temp
-    return ''.join(source)
+def flip(source):    
+    return source[::-1]
 
 for query in queries:
     if query == 1:
