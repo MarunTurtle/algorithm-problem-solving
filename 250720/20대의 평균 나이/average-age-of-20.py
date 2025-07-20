@@ -1,11 +1,12 @@
-ans = 0
+total = 0
 cnt = 0
 
 while True:
     n = int(input())
-    cnt += 1
-    if 20 <= ans <= 29:
-        ans += n
+
+    if 20 <= n <= 29:
+        total += n
+        cnt += 1
     else:
-        print(f"{(ans // cnt):.1f}")
+        print(f"{(total / cnt):.2f}")
         break
