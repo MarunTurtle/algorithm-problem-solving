@@ -6,6 +6,6 @@ while True:
     n = n // d
     cnt += 1
     d += 1
-    if n <= 0:
+    if n <= 1:
         print(cnt)
         break
