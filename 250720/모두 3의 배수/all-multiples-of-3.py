@@ -5,7 +5,6 @@ for _ in range(5):
     cnt += 1
     if cnt == 5:
         print(1)
-        break
     elif n % 3 == 0:
         continue
     else:
