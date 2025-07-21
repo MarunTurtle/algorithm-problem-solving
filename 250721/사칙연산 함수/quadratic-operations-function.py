@@ -7,13 +7,13 @@ def get_prod(x, y):
     return f"{x} * {y} = {x * y}"
 
 def get_sum(x, y):
-    return f"{x} * {y} = {x + y}"
+    return f"{x} + {y} = {x + y}"
 
 def get_quotient(x, y):
-    return f"{x} * {y} = {x / y}"
+    return f"{x} / {y} = {x // y}"
 
 def get_diff(x, y):
-    return f"{x} * {y} = {x - y}"
+    return f"{x} - {y} = {x - y}"
 
 if o == "+":
     print(get_sum(a, c))
