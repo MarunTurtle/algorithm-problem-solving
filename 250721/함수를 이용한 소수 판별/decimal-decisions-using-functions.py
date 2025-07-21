@@ -6,9 +6,9 @@ def is_prime(a, b):
     prime[0] = False
     prime[1] = False
 
-    for i in range(int(b**0.5 + 1)):
-        if prime[i] == True:
-            for j in range(i+1, b+1):
+    for i in range(2, int(b**0.5) + 1):
+        if prime[i]:
+            for j in range(i * i, b + 1, i):
                 if j % i == 0:
                     prime[j] = False
 
