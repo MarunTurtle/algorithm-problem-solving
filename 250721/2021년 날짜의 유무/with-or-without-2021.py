@@ -21,5 +21,6 @@ def does_exist(m, d):
                 return True
     else:
         return False
+    return False
 
 print('Yes') if does_exist(m, d) else print('No')
