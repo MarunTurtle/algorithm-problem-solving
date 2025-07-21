@@ -1,21 +1,17 @@
 m, d = map(int, input().split())
 
 # Please write your code here.
-
-def does_exist(m, d):
+def last_day_num(m):
     if m == 2:
-        return d <= 28
-    elif m <= 7:
-        if m % 2 == 1:
-            return d <= 31
-        if m % 2 == 0:
-            return d <= 30
-    elif 8 <= m <= 12:
-        if m % 2 == 0:
-            return d <= 31
-        if m % 2 == 1:
-            return d <= 30
-    else:
-        return False
+        return 28
+    if m == 4 or m == 6 or m == 9 or m == 1:
+        return 30
+    return 31
 
-print('Yes') if does_exist(m, d) else print('No')
+def judge_day(m, d):
+    if m <= 12 and d <= last_day_num(m):
+        return True
+    return False
+
+print('Yes') if judge_day(m, d) else print('No')
+
