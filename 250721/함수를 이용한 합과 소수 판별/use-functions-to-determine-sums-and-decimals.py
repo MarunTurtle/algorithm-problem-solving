@@ -12,23 +12,14 @@ def is_prime(a, b):
                 prime[j] = False
     
     ans = []
-    for i in range(a, b):
+    for i in range(a, b+1):
         if prime[i]:
             ans.append(i)
     
     return ans
 
 def sum_digits_is_even(x):
-    total = 0
-    while x > 0:
-        n = x % 10
-        total += n
-        x = x // 10
-
-    if total % 2 == 0:
-        return True
-    else:
-        return False
+    return sum(int(d) for d in str(x)) % 2 == 0
 
 primes = is_prime(a, b)
 
