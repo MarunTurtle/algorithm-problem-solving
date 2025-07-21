@@ -19,6 +19,7 @@ def does_exist(m, d):
         if m % 2 == 1:
             if d <= 30:
                 return True
-    return False
+    else:
+        return False
 
 print('Yes') if does_exist(m, d) else print('No')
