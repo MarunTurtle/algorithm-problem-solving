@@ -12,7 +12,7 @@ def does_exist(m, d):
         if m % 2 == 0:
             if d <= 30:
                 return True
-    elif m >= 8:
+    elif 12 >= m >= 8:
         if m % 2 == 0:
             if d <= 31:
                 return True
