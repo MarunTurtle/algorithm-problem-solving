@@ -5,9 +5,9 @@ def func(x):
     if x == 1:
         return 0
     if x % 2 == 0:
-        y = x // 2
+        return 1 + func(x//2)
     else:
-        y = (x * 3) + 1
-    return 1 + func(y)
+        return 1 + func((x * 3) + 1)
+    
 
 print(func(n))
