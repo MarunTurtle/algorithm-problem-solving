@@ -1,18 +1,19 @@
 n = int(input())
 arr = [0] + list(map(int, input().split()))
 
-def lcm(a, b):
+def gcd(x, y):
     gcd = 1
-    for i in range(1, min(a, b) + 1):
-        if a % i == 0 and b % i == 0:
+    for i in range(1, min(x, y) + 1):
+        if x % i == 0 and y % i == 0:
             gcd = i
+    return gcd
 
-    return a * b // gcd
+def lcm(x, y):
+    return x * y // gcd(x, y)
 
+def lcm_list(idx):
+    if idx == 1:
+        return arr[idx]
+    return lcm(arr[idx], lcm_list(idx - 1))
 
-def get_lcm_all(index):
-    if index == 1:
-        return arr[1]
-    return lcm(get_lcm_all(index - 1), arr[index])
-
-print(get_lcm_all(n))
+print(lcm_list(n))
