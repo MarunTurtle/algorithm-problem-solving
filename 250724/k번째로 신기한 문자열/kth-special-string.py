@@ -8,10 +8,7 @@ words.sort()
 
 def is_same(t, word):
     l = len(t)
-    if word[:l] == t:
-        return True
-    else:
-        return False
+    return word[:l] == t
 
 for word in words:
     if is_same(t, word):
