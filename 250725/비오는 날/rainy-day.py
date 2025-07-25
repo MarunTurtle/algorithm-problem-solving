@@ -6,16 +6,15 @@ class Forecast:
         self.day = day
         self.weather = weather
 
-forecasts = []
+ans = Forecast("9999-99-99", "", "")
 
 for _ in range(n):
     date, day, weather = tuple(input().split())
+    
     forecast = Forecast(date, day, weather)
-    forecasts.append(forecast)
+    
+    if weather == "Rain":
+        if ans.date >= forecast.date:
+            ans = forecast
 
-forecasts.sort(key=lambda x:x.date)
-
-for i in range(n):
-    if forecasts[i].weather == "Rain":
-        print(f'{forecasts[i].date} {forecasts[i].day} {forecasts[i].weather}')
-        break
+print(f'{ans.date} {ans.day} {ans.weather}')
