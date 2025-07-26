@@ -12,8 +12,12 @@ def count_days(m, d):
         ans += days_in_month[i]
     return ans
 
-day_diff = count_days(m2, d2) - count_days(m1, d1)
+start = count_days(m1, d1)
+end = count_days(m2, d2)
+answer = 0
 
-answer = (day_diff // 7) + (((day_diff % 7)+1) // (tgt_number+1))
+for i in range(start, end + 1):  
+    if (i - 1) % 7 == tgt_number:  
+        answer += 1
 
 print(answer)
