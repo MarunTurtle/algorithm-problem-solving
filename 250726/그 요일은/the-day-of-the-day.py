@@ -14,6 +14,6 @@ def count_days(m, d):
 
 day_diff = count_days(m2, d2) - count_days(m1, d1)
 
-answer = (day_diff // 7) + ((day_diff % 7) // tgt_number)
+answer = (day_diff // 7) + (((day_diff % 7)+1) // (tgt_number+1))
 
 print(answer)
