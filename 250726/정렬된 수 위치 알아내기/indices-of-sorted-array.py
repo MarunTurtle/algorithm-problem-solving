@@ -1,13 +1,12 @@
 n = int(input())
 nums = list(map(int, input().split()))
+indexed_nums = [(i, nums[i]) for i in range(n)]
 
-indexed_nums = [(i, num) for i, num in enumerate(nums)]
+indexed_nums.sort(key=lambda x:x[1])
 
-indexed_nums.sort(key = lambda x:x[1])
+ans = [0]*n
 
-ranks = [0] * n
+for idx, (i, _) in enumerate(indexed_nums):
+    ans[i] = idx + 1
 
-for rank, (i, _)  in enumerate(indexed_nums):
-    ranks[i] = rank + 1
-
-print(*ranks)
+print(*ans)
