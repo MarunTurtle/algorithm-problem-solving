@@ -17,7 +17,7 @@ end = count_days(m2, d2)
 answer = 0
 
 for i in range(start, end + 1):  
-    if (i - 1) % 7 == tgt_number:  
+    if (i) % 7 == tgt_number:  
         answer += 1
 
 print(answer)
