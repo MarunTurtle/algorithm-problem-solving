@@ -2,7 +2,7 @@ n = int(input())
 digits = []
 
 while True:
-    if n < 2:
+    if n < 2: 
         digits.append(n)
         break
     
