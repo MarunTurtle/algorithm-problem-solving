@@ -5,7 +5,7 @@ for i in range(n):
     a, b = tuple(map(int, input().split()))
     a += 100
     b += 100
-    for j in range(a, b+1):
+    for j in range(a, b):
         dots[j] += 1
 
 print(max(dots))
