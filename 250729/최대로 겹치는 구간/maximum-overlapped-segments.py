@@ -9,6 +9,6 @@ for + in range(n):
     a += OFFSET
     b += OFFSET
     for j in range(a, b):
-        dots[j] += 1
+        checked[j] += 1
 
-print(max(dots))
+print(max(checked))
