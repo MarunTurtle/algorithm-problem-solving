@@ -2,7 +2,7 @@ MAX_R = 100
 
 n = int(input())
 segments = [tuple(map(int, input().split())) for _ in range(n)]
-checked = [0] * MAX_R + 1
+checked = [0] * (MAX_R + 1)
 
 def check_box(x, y):
     global checked
