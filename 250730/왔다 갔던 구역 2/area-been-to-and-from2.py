@@ -1,28 +1,19 @@
-# 현재 위치
-position = 0
-visited = set([position])  # 최초 위치 0에서 시작
-traveled = set()  # 두 번 이상 지나간 구간
+N = int(input())
+pos = 0
+seg_count = {}
 
-N = int(input())  # 명령의 수
-
-# 명령 처리
 for _ in range(N):
-    move, direction = input().split()
-    move = int(move)  # 이동 거리
+    x, d = input().split()
+    x = int(x)
     
-    if direction == "R":
-        for i in range(position + 1, position + move + 1):
-            if i in visited:
-                traveled.add(i)  # 두 번 이상 지나간 구간 기록
-            visited.add(i)
-        position += move
-    
-    elif direction == "L":
-        for i in range(position - 1, position - move - 1, -1):
-            if i in visited:
-                traveled.add(i)  # 두 번 이상 지나간 구간 기록
-            visited.add(i)
-        position -= move
+    for _ in range(x):
+        prev = pos
+        if d == 'R':
+            pos += 1
+        else:
+            pos -= 1
+        seg = (min(prev, pos), max(prev, pos))
+        seg_count[seg] = seg_count.get(seg, 0) + 1
 
-# 두 번 이상 지나간 영역의 크기 출력
-print(len(traveled)-1)
+# 2번 이상 지난 구간의 개수 출력
+print(sum(1 for v in seg_count.values() if v >= 2))
