@@ -4,7 +4,7 @@ w, b = 0, 0
 
 checked = [0] * (2 * MAX_K + 1)
 
-cur = 0
+cur = MAX_K
 
 n = int(input())
 
