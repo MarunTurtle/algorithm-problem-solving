@@ -11,13 +11,15 @@ for _ in range(n):
     distance = int(distance)
 
     if direction == 'L':
-        segment = list(sorted([cur, cur - distance]))
+        selection_left = cur - distance
+        selection_right = cur
         cur -= distance
-    else: 
-        segment = list(sorted([cur, cur + distance]))
+    else:
+        selection_left = cur
+        selection_right = cur + distance
         cur += distance
-    
-    segments.append(segment)
+
+    segments.append([selection_left, selection_right])
 
 checked = [0] * (MAX_R + 1)
 
