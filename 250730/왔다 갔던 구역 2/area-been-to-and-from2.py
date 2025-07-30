@@ -1,28 +1,28 @@
-n = int(input())  # 명령의 개수
-history = {}  # 위치별 방문 횟수를 기록할 딕셔너리
-position = 0  # 시작 위치는 0
+# 현재 위치
+position = 0
+visited = set([position])  # 최초 위치 0에서 시작
+traveled = set()  # 두 번 이상 지나간 구간
 
-# 명령 입력 받기
-for _ in range(n):
-    x, direction = input().split()
-    x = int(x)
+N = int(input())  # 명령의 수
+
+# 명령 처리
+for _ in range(N):
+    move, direction = input().split()
+    move = int(move)  # 이동 거리
     
-    for _ in range(x):
-        if direction == 'L':
-            position -= 1  # 왼쪽으로 이동
-        else:
-            position += 1  # 오른쪽으로 이동
+    if direction == "R":
+        for i in range(position + 1, position + move + 1):
+            if i in visited:
+                traveled.add(i)  # 두 번 이상 지나간 구간 기록
+            visited.add(i)
+        position += move
+    
+    elif direction == "L":
+        for i in range(position - 1, position - move - 1, -1):
+            if i in visited:
+                traveled.add(i)  # 두 번 이상 지나간 구간 기록
+            visited.add(i)
+        position -= move
 
-        # 해당 위치를 기록
-        if position in history:
-            history[position] += 1
-        else:
-            history[position] = 1
-
-# 두 번 이상 지나간 구간의 크기 계산
-overlapped_area = 0
-for count in history.values():
-    if count >= 2:
-        overlapped_area += 1
-
-print(overlapped_area)
+# 두 번 이상 지나간 영역의 크기 출력
+print(len(traveled)-1)
