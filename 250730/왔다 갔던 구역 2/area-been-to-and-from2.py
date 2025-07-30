@@ -1,26 +1,35 @@
-from collections import Counter
+OFFSET = 1000
+MAX_R = 2000
 
 n = int(input())
-position = 0
-cnt = Counter()
+segments = []
+
+cur = 0
 
 for _ in range(n):
-    x, direction = input().split()
-    x = int(x)
+    distance, direction = tuple(input().split())
+    distance = int(distance)
 
     if direction == 'L':
-        for i in range(x):
-            segment = (position, position - 1)
-            segment = tuple(sorted(segment))
-            cnt[segment] += 1
-            position -= 1
-    if direction == 'R':
-        for i in range(x):
-            segment = (position, position + 1)
-            segment = tuple(sorted(segment))
-            cnt[segment] += 1
-            position += 1
+        segment = list(sorted([cur, cur - distance]))
+        cur -= distance
+    else: 
+        segment = list(sorted([cur, cur + distance]))
+        cur += distance
     
-ans = sum(1 for v in cnt.values() if v >= 2)
+    segments.append(segment)
 
-print(ans)
+checked = [0] * (MAX_R + 1)
+
+for x1, x2 in segments:
+    x1, x2 = x1 + OFFSET, x2 + OFFSET
+
+    for i in range(x1, x2):
+        checked[i] += 1
+
+cnt = 0
+for elem in checked:
+    if elem >= 2:
+        cnt += 1
+
+print(cnt)
