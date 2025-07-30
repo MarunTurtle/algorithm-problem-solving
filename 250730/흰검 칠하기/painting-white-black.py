@@ -11,7 +11,7 @@ check_b = [0] * (2 * MAX_K + 1)
 # 검은색, 흰색, 회색 변수 선언
 w, b, g = 0, 0, 0
 # 현재 위치 cur 선언
-cur = 0
+cur = MAX_K
 
 # n까지 반복 하며 이동 입력 받기
 for i in range(n):    
