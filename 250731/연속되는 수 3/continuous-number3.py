@@ -4,10 +4,7 @@ prev = True
 cnt = 0
 
 def define(x):
-    if x > 0:
-        return True
-    else:
-        return False
+    return True if x > 0 else False
 
 for i in range(n):
     x = int(input())
