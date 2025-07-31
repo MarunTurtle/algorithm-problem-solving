@@ -16,7 +16,7 @@ for i in range(t):
     time[s] = (x, y)
 
 for x, y in time:
-    if x == p or y == p:
+    if developers[x] == 1 or developers[y] == 1:
         if cnt < k:
             developers[x] = 1
             developers[y] = 1
