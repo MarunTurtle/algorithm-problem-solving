@@ -12,8 +12,8 @@ for i in range(n):
         curr = new_num
     else:
         cnt += 1
-        if i == n-1:
-            max_cnt = max(cnt, max_cnt)
+
+max_cnt = max(cnt, max_cnt)
 
 print(max_cnt)
 
