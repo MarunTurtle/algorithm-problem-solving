@@ -28,11 +28,11 @@ for shake in shakes:
     if developers[x] == 1 and developers[y] != 1:
         if infect_cnt[x] < k:
             developers[y] = 1    
-            infect_cnt[x] += 1
+        infect_cnt[x] += 1
     elif developers[y] == 1 and developers[x] != 1:
         if infect_cnt[y] < k:
             developers[x] = 1    
-            infect_cnt[y] += 1
+        infect_cnt[y] += 1
     elif developers[y] == 1 and developers[x] == 1:
         infect_cnt[x] += 1
         infect_cnt[y] += 1
