@@ -1,22 +1,30 @@
-MAX_T = 250
+class Shake:
+    def __init__(self, time, p1, p2):
+        self.time = time
+        self.p1 = p1
+        self.p2 = p2
+
 # n명의 개발자
 # k번까지 전염
 # p가 전염 시작
 # t번 동안 악수 진행
 n, k, p, t = map(int, input().split())
+shakes = []
 
 developers = [0] * (n + 1)
 infect_cnt = [0] * (n + 1)
 developers[p] = 1
-cnt = 0
-
-time = [(0, 0)] * (MAX_T + 1)
 
 for i in range(t):
     s, x, y = map(int, input().split())
-    time[s] = (x, y)
+    shakes.append(Shake(s, x, y))
 
-for x, y in time:
+shakes.sort(key = lambda x: x.time)
+
+for shake in shakes:
+    x = shake.p1
+    y = shake.p2
+
     if developers[x] == 1 and developers[y] != 1:
         if infect_cnt[x] < k:
             developers[y] = 1    
