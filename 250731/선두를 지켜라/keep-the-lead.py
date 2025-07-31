@@ -18,7 +18,7 @@ for j in range(m):
         b_loc.append(b)
 
 cnt = 0
-leader = 'a'
+leader = ''
 
 for i in range(len(b_loc)):
     cur_a = a_loc[i]
@@ -26,16 +26,12 @@ for i in range(len(b_loc)):
     prev_leader = leader
 
     if cur_a > cur_b:
-        new_leader = 'a'
+        if leader == 'b':
+            cnt += 1 
+        leader = 'a'
     elif cur_a < cur_b:
-        new_leader = 'b'
-    else:
-        new_leader = prev_leader
-
-    if i == 0:
-        leader = new_leader
-    elif new_leader != prev_leader:
-        cnt += 1
-        leader = new_leader
-
+        if leader == 'a':
+            cnt += 1
+        leader = 'b'
+    
 print(cnt)
