@@ -20,17 +20,14 @@ for x, y in time:
     if developers[x] == 1 and developers[y] != 1:
         if infect_cnt[x] < k:
             developers[y] = 1    
-        infect_cnt[x] += 1
-        print(f" x infected y {x , y}")
+            infect_cnt[x] += 1
     elif developers[y] == 1 and developers[x] != 1:
         if infect_cnt[y] < k:
             developers[x] = 1    
-        infect_cnt[y] += 1
-        print(f" y infected x {x , y}")
+            infect_cnt[y] += 1
     elif developers[y] == 1 and developers[x] == 1:
         infect_cnt[x] += 1
         infect_cnt[y] += 1
-        print(f" x, y are both infected {x , y}")
 
 for i in range(1, n + 1):
     print(developers[i], end="")
