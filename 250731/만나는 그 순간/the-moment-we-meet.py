@@ -32,9 +32,13 @@ for i in range(m):
 
 sec = 1
 
-for i in range(len(a_loc)):
-    if a_loc[i] == b_loc[i]:
-        print(sec)
-        break
-    else:
-        sec += 1
+def get_time():
+    global sec
+    for i in range(len(a_loc)):
+        if a_loc[i] == b_loc[i]:
+            return sec
+        else:
+            sec += 1
+    return -1
+
+print(get_time())
