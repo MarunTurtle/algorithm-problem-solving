@@ -6,6 +6,7 @@ MAX_T = 250
 n, k, p, t = map(int, input().split())
 
 developers = [0] * (n + 1)
+infect_cnt = [0] * (n + 1)
 developers[p] = 1
 cnt = 0
 
@@ -16,11 +17,20 @@ for i in range(t):
     time[s] = (x, y)
 
 for x, y in time:
-    if developers[x] == 1 or developers[y] == 1:
-        if cnt < k:
-            developers[x] = 1
-            developers[y] = 1
-            cnt += 1
+    if developers[x] == 1 and developers[y] != 1:
+        if infect_cnt[x] < k:
+            developers[y] = 1    
+        infect_cnt[x] += 1
+        print(f" x infected y {x , y}")
+    elif developers[y] == 1 and developers[x] != 1:
+        if infect_cnt[y] < k:
+            developers[x] = 1    
+        infect_cnt[y] += 1
+        print(f" y infected x {x , y}")
+    elif developers[y] == 1 and developers[x] == 1:
+        infect_cnt[x] += 1
+        infect_cnt[y] += 1
+        print(f" x, y are both infected {x , y}")
 
 for i in range(1, n + 1):
     print(developers[i], end="")
