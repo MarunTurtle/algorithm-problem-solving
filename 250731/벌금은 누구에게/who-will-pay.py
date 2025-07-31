@@ -2,13 +2,14 @@ n, m, k = map(int, input().split())
 
 student_pts = [0] * (n + 1)
 
-while True:
+ans = -1
+
+for i in range(m):
     x = int(input())
     student_pts[x] += 1
+    
     if student_pts[x] >= k:
-        print(x)
+        ans = x
         break
-    m -= 1
-    if m == 0:
-        print(-1)
-        break
+        
+print(ans)
