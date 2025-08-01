@@ -22,6 +22,6 @@ for i in range(t):
     if 1 <= nr <= n and 1 <= nc <= n:
         r, c = nr, nc
     else:
-        drct = 3 - dir_dict[d]
+        drct = 3 - drct
 
 print(r, c)
