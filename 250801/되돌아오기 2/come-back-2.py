@@ -29,5 +29,6 @@ def move(command):
 for command in commands:
     if move(command):
         ans = time
+        break
 
 print(ans)
