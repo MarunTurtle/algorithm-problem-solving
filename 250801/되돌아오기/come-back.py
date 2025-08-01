@@ -13,19 +13,25 @@ dict_dir = {
     'N': 3
 }
 
-for i in range(n):
-    dir_str, t = input().split()
-    t = int(t)
-    dir_num = dict_dir[dir_str]
-    
-    for i in range(t):
+def move(dir_num, t):
+    global x, y
+    global ans, sec
+
+    for _ in range(t):
         x += dx[dir_num]
         y += dy[dir_num]
         sec += 1
         if x == 0 and y == 0:
             ans = sec
-            break
-    if ans != -1:
-        break
+            return True
+    return False
 
+for i in range(n):
+    dir_str, t = input().split()
+    t = int(t)
+    dir_num = dict_dir[dir_str]
+    
+    if move(dir_num, t):
+        break
+    
 print(ans)
