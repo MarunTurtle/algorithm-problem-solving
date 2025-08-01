@@ -6,12 +6,12 @@ dc = [0, 1, 0, -1]
 
 def count_neighbors(r, c):
     global grid
-
+    
     cnt = 0
     for i in range(4):
         nr = r + dr[i]
         nc = c + dc[i]
-        if 0 <= nr < 4 and 0 <= nc < 4:
+        if 0 <= nr < n and 0 <= nc < n:
             if grid[nr][nc] == 1:
                 cnt += 1
     return cnt
