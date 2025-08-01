@@ -8,14 +8,16 @@ for i in range(n):
     d, moves = input().split()
     moves = int(moves)
     
-    for i in range(moves):
-        if d == 'E':
-            x, y = x + dx[0], y + dy[0]
-        elif d == 'S':
-            x, y = x + dx[1], y + dy[1]
-        elif d == 'W':
-            x, y = x + dx[2], y + dy[2]
-        else:
-            x, y = x + dx[3], y + dy[3]
+    if d == 'E':
+        move_dir = 0
+    elif d == 'S':
+        move_dir = 1
+    elif d == 'W':
+        move_dir = 2
+    else:
+        move_dir = 3
+    
+    x += dx[move_dir] * moves
+    y += dy[move_dir] * moves
 
 print(x, y)
