@@ -1,7 +1,7 @@
 x, y = 0, 0
 
 dx = [0, 1, 0, -1]
-dy = [-1, 0 , 1, 0]
+dy = [1, 0 , -1, 0]
 
 commands = list(input())
 cur_dir = 0
