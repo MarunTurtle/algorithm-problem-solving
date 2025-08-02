@@ -1,8 +1,7 @@
 n = int(input())
 A = list(map(int, input().split()))
 
-min_sum = (n * 100) + 1
-
+min_sum = float('inf')
 for i in range(n):
     cur_sum = 0
     for j in range(n):
