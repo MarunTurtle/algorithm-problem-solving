@@ -1,16 +1,13 @@
 n = int(input())
 A = list(map(int, input().split()))
 
-min_sum = (n * 100) + 1
+min_sum = float('inf')
 
-for i in range(n):
-    # print(f"{i}번째")
+for i in range(n):  # i: 사람들이 모일 집의 인덱스
     cur_sum = 0
-    # print(cur_sum)
     for j in range(n):
-        cur_sum += A[j] * abs(i - j)
-        # print(f"{cur_sum}, {i} - {j}")
+        distance = abs(i - j)
+        cur_sum += A[j] * distance  # j번 집에 있는 A[j]명 모두 이동
     min_sum = min(min_sum, cur_sum)
 
 print(min_sum)
-
