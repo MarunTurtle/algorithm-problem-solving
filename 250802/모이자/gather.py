@@ -5,13 +5,12 @@ min_sum = (n * 100) + 1
 
 for i in range(n):
     # print(f"{i}번째")
-    sum = 0
-    # print(sum)
+    cur_sum = 0
+    # print(cur_sum)
     for j in range(n):
-        sum += A[j] * abs(i - j)
-        # print(f"{sum}, {i} - {j}")
-    if sum <= min_sum:
-        min_sum = sum
+        cur_sum += A[j] * abs(i - j)
+        # print(f"{cur_sum}, {i} - {j}")
+    min_sum = min(min_sum, cur_sum)
 
 print(min_sum)
 
