@@ -10,7 +10,7 @@ for i in range(n):
     for j in range(n):
         sum += A[j] * abs(i - j)
         # print(f"{sum}, {i} - {j}")
-    if sum < min_sum:
+    if sum <= min_sum:
         min_sum = sum
 
 print(min_sum)
