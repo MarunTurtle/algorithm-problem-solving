@@ -6,7 +6,7 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 dx = [-1, 0, 1, 0]
 dy = [0, 1, 0, -1]
 cur_dir = 0
-x, y = (n)//2, (n)//2
+x, y = n//2, n//2
 total = grid[x][y]
 # print(total)
 def in_range(x, y):
