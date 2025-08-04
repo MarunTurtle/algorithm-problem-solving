@@ -48,7 +48,7 @@ def mirror_change_dir(mirror):
         return False
 
 while True:
-    # print(x, y)
+    print(x, y)
     mirror = grid[x][y]
     if mirror_change_dir(mirror):
         continue
