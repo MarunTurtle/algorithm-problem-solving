@@ -14,7 +14,6 @@ def in_range(x, y):
 
 def move(command):
     global x, y
-    global grid
     global cur_dir
     global total
 
