@@ -12,7 +12,7 @@ def calc_cur_place(k):
     if calc_cur_dir(k) == 0:
         return (0, k-1)
     elif calc_cur_dir(k) == 1:
-        return (k-1 % 3, n-1)
+        return (k-1 % n, n-1)
     elif calc_cur_dir(k) == 2:
         return (n-1, n - 1 - ((k-1) % n))
     else:
