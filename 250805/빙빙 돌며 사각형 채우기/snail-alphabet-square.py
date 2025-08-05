@@ -15,8 +15,8 @@ def in_range(r, c):
 x, y = 0, 0
 grid[0][0] = 'A'
 
-for i in range(2, (n*m) + 1):
-    letter = chr(base + i - 1)
+for i in range(1, (n*m)):
+    letter = chr(base + i)
     
     while True:
         nx = x + dx[cur_dir]
@@ -32,5 +32,5 @@ for i in range(2, (n*m) + 1):
 
 for row in grid:
     for a in row:
-        print(a, end=" ")
+        print(a, end=' ')
     print()
