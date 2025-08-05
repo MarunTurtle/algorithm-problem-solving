@@ -1,46 +1,34 @@
+# 변수 선언 및 입력:
 n = int(input())
 grid = [[0] * n for _ in range(n)]
 
-# Please write your code here.
-cur_dir = 0
-dx = [0, -1, 0, 1]
-dy = [1, 0, -1, 0]
+curr_x, curr_y = n // 2, n // 2
+move_dir, move_num = 0, 1
 
-x, y = n // 2, n // 2
-grid[x][y] = 1
-# print(f"x:{x}, y:{y}, i:1, dir:{cur_dir}")
+def in_range(x, y):
+    return 0 <= x and x < n and 0 <= y and y < n
 
-def in_range(r, c):
-    return 0 <= r < n and 0 <= c < n
+def move():
+    global curr_x, curr_y
+    dxs, dys = [0, -1, 0, 1], [1, 0, -1, 0]
+    curr_x, curr_y = curr_x + dxs[move_dir], curr_y + dys[move_dir]
 
-def turn(nx, ny):
-    if nx == n // 2 and ny == n // 2:
-        return cur_dir
-    elif nx == ny and nx <= n // 2 and ny <= n // 2:
-        return (cur_dir + 1) % 4
-    elif n - nx == ny + 1 or nx + 1 == n - ny:
-        return (cur_dir + 1) % 4
-    elif nx + 1 == ny and nx >= (n // 2):
-        return (cur_dir + 1) % 4
-    else:
-        return cur_dir
+cnt = 1
+
+while in_range(curr_x, curr_y):
+    for _ in range(move_num):
+        grid[curr_x][curr_y] = cnt
+        cnt += 1
+        move()
+        
+        if not in_range(curr_x, curr_y):
+            break
     
+    move_dir = (move_dir + 1) % 4
+    if move_dir == 0 or move_dir == 2:
+        move_num += 1
 
-
-for i in range(2, (n*n) + 1):
-    cur_dir = turn(x, y)
-
-    x += dx[cur_dir]
-    y += dy[cur_dir]
-
-    # print(f"x:{x}, y:{y}, i:{i}, dir:{cur_dir}")
-
-    if not in_range(x, y):
-        print(x, y)
-        break
-    grid[x][y] = i
-
-for row in grid:
-    for num in row:
-        print(num, end=' ')
+for i in range(n):
+    for j in range(n):
+        print(grid[i][j], end=" ")
     print()
