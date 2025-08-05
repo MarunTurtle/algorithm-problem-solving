@@ -16,7 +16,7 @@ x, y = 0, 0
 grid[0][0] = 'A'
 
 for i in range(1, (n*m)):
-    letter = chr(base + i)
+    letter = chr(base + (i % 26))
     
     while True:
         nx = x + dx[cur_dir]
