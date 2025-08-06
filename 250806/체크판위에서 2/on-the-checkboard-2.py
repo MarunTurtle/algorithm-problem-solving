@@ -17,7 +17,8 @@ for i in range(1, n-1):
             for k in range(i+1, n-1):
                 for l in range(j+1, m-1):
                     if is_jumpable(i, j, k, l):
-                        if k < n-1 and k < m-1:
+                        if is_jumpable(k, l, n-1, m-1):
+                            # print(i, j, k, l)
                             cnt += 1
 
 print(cnt)
