@@ -8,7 +8,7 @@ for i in range(length):
     
     sums = 0
     for j in range(length):
-        sums = sum * 2 + a[j]
+        sums = sums * 2 + a[j]
     max_num = max(max_num, sums)
     a[i] = 1 - int(a[i])
 
