@@ -1,13 +1,14 @@
-a = list(input())
-
+a = list(map(int, list(input())))
+length = len(a)
 # Please write your code here.
 max_num = 0
 
-for i in range(len(a)):
-    a[i] = 1 - int(a[i])
+for i in range(length):
+    a[i] = 1 - a[i]
+    
     sums = 0
-    for j in range(len(a)):
-        sums += 2 ** (len(a) - j - 1) * int(a[j])
+    for j in range(length):
+        sums = sum * 2 + a[j]
     max_num = max(max_num, sums)
     a[i] = 1 - int(a[i])
 
