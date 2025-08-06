@@ -6,10 +6,9 @@ checkpoints = [tuple(map(int, input().split())) for _ in range(n)]
 
 min_distance = MIN_DIST
 
-x, y = checkpoints[0][0], checkpoints[0][1]
-
 for i in range(1, n-1):
     curr_distance = 0
+    x, y = checkpoints[0][0], checkpoints[0][1]
     for j in range(1, n):
         if j == i:
             continue
@@ -19,6 +18,5 @@ for i in range(1, n-1):
             x, y = nx, ny
             
     min_distance = min(min_distance, curr_distance)
-    x, y = checkpoints[0][0], checkpoints[0][1]
 
 print(min_distance)
