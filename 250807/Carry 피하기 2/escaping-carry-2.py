@@ -1,11 +1,10 @@
-import sys
 
 n = int(input())
 nums = []
 for _ in range(n):
     nums.append(int(input()))
 
-max_ans = -sys.maxsize
+max_ans = -1
 
 def does_not_carry(num1, num2):
     n, m = num1, num2
