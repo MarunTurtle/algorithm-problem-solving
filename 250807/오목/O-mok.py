@@ -24,11 +24,6 @@ for i in range(1, 20):
                 cnt += 1
                 x, y = nx, ny
             if cnt == 5:
-                # 중복 방지용 앞칸 확인 (이건 여전히 있으면 안전)
-                prev_x = i - dx[d]
-                prev_y = j - dy[d]
-                if in_range(prev_x, prev_y) and board[prev_x][prev_y] == color:
-                    continue
                 if color == 1 and black_win is None:
                     black_win = (i + (dx[d] * 2), j + (dy[d] * 2))
                 elif color == 2 and white_win is None:
