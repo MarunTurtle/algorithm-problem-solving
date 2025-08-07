@@ -1,41 +1,27 @@
-import sys
-
+# 변수 선언 및 입력
 n = int(input())
-grid = [list(map(int, input().split())) for _ in range(n)]
+arr = [
+    list(map(int, input().split()))
+    for _ in range(n)
+]
 
-ans = -sys.maxsize
-
-# Please write your code here.
-def in_range(x, y):
-    return 0 <= x < n and 0 <= y < n
-
-def count_coins(x, y):
-    cnt = 0
-    for i in range(3):
-        nx, ny = x, y + i
-        if not in_range(nx, ny):
-            return 0
-        if grid[nx][ny] == 1:
-            cnt += 1
-    return cnt
-
+# Step 1.
+# 첫 번째 격자를 놓습니다. (i , j)
+max_cnt = 0
 for i in range(n):
-    for j in range(n):
-        temp_ans = count_coins(i, j)
+    # 격자를 벗어나지 않을 범위로만 잡습니다.
+    for j in range(n - 2):
+        # 두 번째 격자를 놓습니다. (k , l)
+        for k in range(n):
+            # 격자를 벗어나지 않을 범위로만 잡습니다.
+            for l in range(n - 2):
+                # Step2. 두 격자가 겹치는 경우에는 가짓수로 세지 않습니다.
+                if i == k and abs(j - l) <= 2:
+                        continue
+                
+                # Step 3. 두 격자가 겹치지 않는 경우에 대해 동전 수를 세어 갱신해줍니다.
+                cnt1 = arr[i][j] + arr[i][j + 1] + arr[i][j + 2]
+                cnt2 = arr[k][l] + arr[k][l + 1] + arr[k][l + 2]
+                max_cnt = max(max_cnt, cnt1 + cnt2)
 
-        for k in range(i, n):
-            if k == i:
-                for l in range(j+3, n):
-                    temp_ans += count_coins(k, l)    
-                    # print(i, j, k, l)
-                    ans = max(ans, temp_ans)
-                    temp_ans = count_coins(i, j)
-            else:
-                for l in range(n):
-                    temp_ans += count_coins(k, l)    
-                    # print(i, j, k, l)
-                    ans = max(ans, temp_ans)
-                    temp_ans = count_coins(i, j)
-
-            
-print(ans)
+print(max_cnt)
