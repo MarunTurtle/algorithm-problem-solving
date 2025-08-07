@@ -5,7 +5,7 @@ arr = [0] * (MAX_NUM + 1)
 
 for _ in range(n):
     q, idx = map(int, input().split())
-    arr[idx] = q
+    arr[idx] += q
 
 max_sum = 0
 
