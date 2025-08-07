@@ -10,11 +10,11 @@ for _ in range(n):
 max_sum = 0
 
 for i in range(MAX_NUM - k + 2):
-    if i - k > 0 and i + k <= MAX_NUM:
+    if i - k >= 0 and i + k <= MAX_NUM:
         cur_sum = sum(arr[i-k:i+k+1])
-    elif i - k <= 0 and i + k > MAX_NUM:
+    elif i - k < 0 and i + k > MAX_NUM:
         cur_sum = sum(arr)
-    elif i - k <= 0:
+    elif i - k < 0:
         cur_sum = sum(arr[0:i+k+1])
     else:
         cur_sum = sum(arr[i-k:])
