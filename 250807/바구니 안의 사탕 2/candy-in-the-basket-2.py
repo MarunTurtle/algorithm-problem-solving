@@ -9,10 +9,12 @@ for _ in range(n):
 
 max_sum = 0
 
-for i in range(MAX_NUM + 1):
-    left = max(0, i - k)
-    right = min(MAX_NUM, i + k)
-    cur_sum = sum(arr[left:right+1])
+for i in range(MAX_NUM):
+    cur_sum = 0
+    for j in range(i - k, i + k + 1):
+        if j >= 0 and j <= MAX_NUM:
+            cur_sum += arr[j]
+    
     max_sum = max(max_sum, cur_sum)
 
 print(max_sum)
