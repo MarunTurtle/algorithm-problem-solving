@@ -9,7 +9,7 @@ for _ in range(n):
 
 max_sum = 0
 
-for i in range(MAX_NUM - k + 2):
+for i in range(MAX_NUM - k + 1):
     if i - k >= 0 and i + k <= MAX_NUM:
         cur_sum = sum(arr[i-k:i+k+1])
     elif i - k < 0 and i + k > MAX_NUM:
