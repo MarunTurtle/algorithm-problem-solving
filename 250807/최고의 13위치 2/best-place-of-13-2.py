@@ -27,13 +27,13 @@ for i in range(n):
             if k == i:
                 for l in range(j+3, n):
                     temp_ans += count_coins(k, l)    
-                    print(i, j, k, l)
+                    # print(i, j, k, l)
                     ans = max(ans, temp_ans)
                     temp_ans = count_coins(i, j)
             else:
                 for l in range(n):
                     temp_ans += count_coins(k, l)    
-                    print(i, j, k, l)
+                    # print(i, j, k, l)
                     ans = max(ans, temp_ans)
                     temp_ans = count_coins(i, j)
 
