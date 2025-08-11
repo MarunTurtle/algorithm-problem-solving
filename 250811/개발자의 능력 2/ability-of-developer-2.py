@@ -1,25 +1,37 @@
 import sys
-input = sys.stdin.readline
 
-level = list(map(int, input().split()))  # 6개
-ans = 10**18
-idx_all = list(range(6))
+INT_MAX = sys.maxsize
 
-# 첫 쌍은 항상 (0, j)로 고정해 중복 제거
-for j in range(1, 6):
-    s1 = level[0] + level[j]
-    rem = [x for x in idx_all if x not in (0, j)]  # 남은 4명 (오름차순)
+# 변수 선언 및 입력
+n = 6
+arr = list(map(int, input().split()))
 
-    # 남은 4명 중 가장 작은 rem[0]을 두 번째 쌍의 앵커로 고정
-    for t in range(1, 4):
-        a, b = rem[0], rem[t]              # 두 번째 쌍
-        # 나머지 두 명이 세 번째 쌍
-        c, d = [x for x in rem if x not in (a, b)]
 
-        s2 = level[a] + level[b]
-        s3 = level[c] + level[d]
-        diff = max(s1, s2, s3) - min(s1, s2, s3)
-        if diff < ans:
-            ans = diff
+def diff(i, j, k, l):
+	# 세 번째 팀원의 합은 전체에서 첫 번째 팀원과 두 번째 팀원의 합을 빼주면 됩니다.
+	sum1 = arr[i] + arr[j]
+	sum2 = arr[k] + arr[l]
+	sum3 = sum(arr) - sum1 - sum2
+	
+	# 세 팀의 차이 중 최댓값을 리턴합니다.
+	ret = abs(sum1 - sum2)
+	ret = max(ret, abs(sum2 - sum3))
+	ret = max(ret, abs(sum3 - sum1))
+	
+	return ret
 
-print(ans)
+
+# 첫 번째 팀원을 만들어줍니다.
+min_diff = INT_MAX
+for i in range(n):
+	for j in range(i + 1, n):
+		
+		# 두 번째 팀원을 만들어줍니다.
+		for k in range(n):
+			for l in range(k + 1, n):
+				# 첫 번째 팀원과 두 번째 팀원이 겹치는지 여부를 확인합니다.
+				if k == i or k == j or l == i or l == j:
+					continue
+				min_diff = min(min_diff, diff(i, j, k, l))
+
+print(min_diff)
