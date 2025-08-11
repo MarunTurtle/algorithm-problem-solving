@@ -28,7 +28,7 @@ for i in range(n):
                 dif =  diff(i, j, k, l)
                 if dif != 0:
                     ans = min(ans, dif)
-                    # print(f"{i, j, k, l} | {ans}")
+                    print(f"{i, j, k, l} | {ans}")
 
 if ans == sys.maxsize:
     print(-1)
