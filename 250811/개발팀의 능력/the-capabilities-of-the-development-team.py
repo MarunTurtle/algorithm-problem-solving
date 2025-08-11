@@ -9,7 +9,7 @@ n = 5
 ans = sys.maxsize
 
 uniq_num = set(arr)
-if uniq_num == 1:
+if len(uniq_num) == 1:
     ans = -1
 
 def diff(i, j, k, l):
