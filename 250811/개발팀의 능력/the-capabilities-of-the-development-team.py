@@ -10,10 +10,13 @@ ans = sys.maxsize
 # if len(uniq_num) == 1:
 #     ans = -1
 
-def diff(i, j, k):
-    sum1 = arr[i] + arr[j]
-    sum2 = arr[k]
+def diff(i, j, k):    
+    sum1 = arr[i]
+    sum2 = arr[k] + arr[j]
     sum3 = sum(arr) - sum1 - sum2
+
+    if sum1 == sum2 or sum2 == sum3 or sum3 == sum1:
+        return sys.maxsize
 
     max_sum = max(sum1, sum2, sum3)
     min_sum = min(sum1, sum2, sum3)
