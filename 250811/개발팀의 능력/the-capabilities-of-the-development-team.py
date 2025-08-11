@@ -3,18 +3,16 @@ import sys
 input = sys.stdin.readline
 
 arr = list(map(int, input().split()))
-
 n = 5
-
 ans = sys.maxsize
 
-uniq_num = set(arr)
-if len(uniq_num) == 1:
-    ans = -1
+# uniq_num = set(arr)
+# if len(uniq_num) == 1:
+#     ans = -1
 
-def diff(i, j, k, l):
+def diff(i, j, k):
     sum1 = arr[i] + arr[j]
-    sum2 = arr[k] + arr[l]
+    sum2 = arr[k]
     sum3 = sum(arr) - sum1 - sum2
 
     max_sum = max(sum1, sum2, sum3)
@@ -23,15 +21,14 @@ def diff(i, j, k, l):
     return max_sum - min_sum
 
 for i in range(n):
-    for j in range(i+1, n):
-        
+    for j in range(n):
         for k in range(n):
-            for l in range(k+1, n):
-                if k == i or k == j or l == i or l == j:
-                    continue
-                dif =  diff(i, j, k, l)
-                if dif != 0:
-                    ans = min(ans, dif)
-                    # print(f"{i, j, k, l} | {ans}")
+            if k != i or k != j or i != j:
+                dif =  diff(i, j, k)
+                ans = min(ans, dif)
+                # print(f"{i, j, k, l} | {ans}")
 
-print(ans)
+if ans == sys.maxsize:
+    print(-1)
+else:
+    print(ans)
