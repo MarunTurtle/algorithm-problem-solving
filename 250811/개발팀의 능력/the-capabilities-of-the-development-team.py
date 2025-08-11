@@ -26,7 +26,7 @@ def diff(i, j, k):
 for i in range(n):
     for j in range(n):
         for k in range(n):
-            if k != i or k != j or i != j:
+            if i != j or j != k or i != k:
                 dif =  diff(i, j, k)
                 ans = min(ans, dif)
                 # print(f"{i, j, k, l} | {ans}")
