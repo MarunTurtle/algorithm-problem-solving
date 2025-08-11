@@ -11,7 +11,7 @@ for i in range(n):
 min_area = sys.maxsize
 
 for i in range(n):
-    min_x, min_y = 101, 101
+    min_x, min_y = sys.maxsize, sys.maxsize
     max_x, max_y = 0, 0
     for j in range(n):
         if j == i:
