@@ -8,6 +8,10 @@ n = 5
 
 ans = sys.maxsize
 
+uniq_num = set(arr)
+if uniq_num == 1:
+    ans = -1
+
 def diff(i, j, k, l):
     sum1 = arr[i] + arr[j]
     sum2 = arr[k] + arr[l]
@@ -28,9 +32,6 @@ for i in range(n):
                 dif =  diff(i, j, k, l)
                 if dif != 0:
                     ans = min(ans, dif)
-                    print(f"{i, j, k, l} | {ans}")
+                    # print(f"{i, j, k, l} | {ans}")
 
-if ans == sys.maxsize:
-    print(-1)
-else: 
-    print(ans)
+print(ans)
