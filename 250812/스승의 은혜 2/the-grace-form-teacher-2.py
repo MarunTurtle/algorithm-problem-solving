@@ -20,7 +20,7 @@ for i in range(n):
             present_price = presents[j]
         
         if budget_cut < present_price:
-            break
+            continue
         else:
             budget_cut -= present_price
             count += 1
