@@ -1,32 +1,25 @@
-p, c, cl, sl = tuple(map(int, input().split()))
+p, c, cl, sl = map(int, input().split())
 
-cheese_logs = [list(map(int, input().split())) for _ in range(cl)]
-sick_logs = [list(map(int, input().split())) for _ in range(sl)]
+cheese_logs = [tuple(map(int, input().split())) for _ in range(cl)]  # (person, cheese, time)
+sick_logs   = [tuple(map(int, input().split())) for _ in range(sl)]  # (person, sick_time)
 
-cheese_logs.sort(key=lambda x : (x[1], x[2]))
-# print(cheese_logs)
+# 아픈 사람 목록
+sick_people = {person for person, _ in sick_logs}
 
-poten_sick_person = [0] * (p+1)
-toxic_cheese = [0] * (c+1)
+# 1. 치즈별로 "아프기 전에 먹은 아픈 사람들" 집합 만들기
+ate_before_sick = [set() for _ in range(c+1)]
 
-for sick_log in sick_logs:
-    sick_person = sick_log[0]
-    sick_time = sick_log[1]
-    for cheese_log in cheese_logs:
-        person = cheese_log[0]
-        cheese = cheese_log[1]
-        time = cheese_log[2]
-        if sick_person == person and time < sick_time:
-            toxic_cheese[cheese] += 1
+for person, cheese, time in cheese_logs:
+    for sick_person, sick_time in sick_logs:
+        if person == sick_person and time < sick_time:
+            ate_before_sick[cheese].add(person)
 
-for cheese_log in cheese_logs:
-    person = cheese_log[0]
-    cheese = cheese_log[1]
-    time = cheese_log[2]
+# 2. 모든 아픈 사람이 먹은 치즈 찾기
+toxic_cheeses = {cheese for cheese in range(1, c+1)
+                 if ate_before_sick[cheese] == sick_people}
 
-    if toxic_cheese[cheese] == len(sick_logs):
-        poten_sick_person[person] = 1
+# 3. 그 치즈를 먹은 사람 전부 찾기
+poten_sick_people = {person for person, cheese, _ in cheese_logs
+                     if cheese in toxic_cheeses}
 
-ans = poten_sick_person.count(1)
-
-print(ans)
+print(len(poten_sick_people))
