@@ -10,20 +10,22 @@ presents = [int(input()) for _ in range(n)]
 max_count = 0
 
 for i in range(n):
-    count = 0
-    budget_cut = budget
-    for j in range(n):
-        present_price = 0
-        if j == i:
-            present_price = (presents[j]//2)
-        else:
-            present_price = presents[j]
-        
-        if budget_cut < present_price:
-            continue
-        else:
-            budget_cut -= present_price
-            count += 1
-    max_count = max(count, max_count)
+    for k in range(n):
+        count = 0
+        budget_cut = budget
+        for j in range(k, n):
+            present_price = 0
+            if j == i:
+                present_price = (presents[j]//2)
+            else:
+                present_price = presents[j]
+            
+            if budget_cut < present_price:
+                continue
+            else:
+                budget_cut -= present_price
+                count += 1
+
+        max_count = max(count, max_count)
 
 print(max_count)
