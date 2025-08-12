@@ -4,7 +4,7 @@ P = [gift[0] for gift in gifts]
 S = [gift[1] for gift in gifts]
 
 # Please write your code here.
-gifts.sort(key= lambda x: x[0])
+gifts.sort(key= lambda x: (x[0] + x[1], x[0]))
 
 ans = 0
 
