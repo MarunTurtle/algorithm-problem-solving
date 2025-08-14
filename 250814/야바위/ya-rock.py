@@ -23,4 +23,4 @@ for i in range(1, 4):
         max_point = point
         max_location = i
     
-print(max_location)
+print(max_point)
