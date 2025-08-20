@@ -1,20 +1,20 @@
 n = int(input())
 letters = input()
 
-ans = n // 2 + 1
+ans = n
 
-for i in range(n//2, 0, -1):
-    chunk = letters[:i]
-    m = len(chunk)
-    # print(chunk)
+for m in range(1, n + 1):
     alone = True
-
-    for j in range(m, n-m+1):
-        if chunk == letters[j: j+m]:
-            # print(chunk, letters[j:j+m])
-            alone = False
-    
-    if alone: 
-        ans = min(ans, m)
+    for j in range(0, n-m+1):
+        sub = letters[j:j+m]
+        for k in range(j + 1, n - m + 1):
+            if sub == letters[k: k+m]:
+                alone = False
+                break
+        if not alone: 
+            break
+    if alone:
+        ans = m
+        break
 
 print(ans)
