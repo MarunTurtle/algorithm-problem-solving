@@ -1,9 +1,11 @@
+import sys
+
 n = int(input())
 ranges = [tuple(map(int, input().split())) for _ in range(n)]
 a, b = zip(*ranges)
 a, b = list(a), list(b)
 
-ans = 11
+ans = sys.maxsize
 
 for i in range(1, 11):
     pos_ans = True
