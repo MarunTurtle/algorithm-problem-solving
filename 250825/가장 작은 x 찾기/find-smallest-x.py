@@ -7,9 +7,9 @@ a, b = list(a), list(b)
 
 ans = sys.maxsize
 start = a[0] // 2
-end = b[n-1] // 2
+end = b[0] // 2
 
-for i in range(start, end):
+for i in range(start, end+1):
     pos_ans = True
     for j in range(1, n+1):
         if a[j-1] <= i * (2 ** j) <= b[j-1]:
