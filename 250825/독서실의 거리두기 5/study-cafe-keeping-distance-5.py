@@ -5,8 +5,8 @@ seats = list(input())
 ans = 0
 
 def get_min_distance(x):
-    min_dist = len(seats)
-    for i in range(len(seats)):
+    min_dist = n
+    for i in range(n):
         if i == x:
             continue
         if seats[i] == '1':
@@ -14,7 +14,7 @@ def get_min_distance(x):
             min_dist = min(dis, min_dist)
     return min_dist
 
-for i in range(len(seats)):
+for i in range(n):
     if seats[i] == '1':
         continue
     
