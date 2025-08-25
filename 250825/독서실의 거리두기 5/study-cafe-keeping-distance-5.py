@@ -1,18 +1,22 @@
-import sys
-
 n = int(input())
-seats = list(map(int, list(input())))
-pos_ones = [i for i, c in enumerate(seats) if c == 1]
+seat = list(input())
 
-def get_minimum_dist(at):
-    arr = pos_ones + [at]
-    arr.sort()
-    return min(arr[i+1] - arr[i] for i in range(len(arr) - 1))
 
-ans = -1
+def min_dist():
+    dist = n
+    for i in range(n):
+        for j in range(i + 1, n):
+            if seat[i] == '1' and seat[j] == '1':
+                dist = min(dist, j - i)
+    
+    return dist
+
+
+ans = 0
 for i in range(n):
-    if seats[i] == 0:
-        ans = max(ans, get_minimum_dist(i))
+    if seat[i] == '0':
+        seat[i] = '1'
+        ans = max(ans, min_dist())
+        seat[i] = '0'
 
 print(ans)
-
