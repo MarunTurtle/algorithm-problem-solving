@@ -6,8 +6,10 @@ a, b = zip(*ranges)
 a, b = list(a), list(b)
 
 ans = sys.maxsize
+start = a[0] // 2
+end = b[n-1] // 2
 
-for i in range(1, 11):
+for i in range(start, end):
     pos_ans = True
     for j in range(1, n+1):
         if a[j-1] <= i * (2 ** j) <= b[j-1]:
@@ -15,7 +17,8 @@ for i in range(1, 11):
         else:
             pos_ans = False
     if pos_ans:
-        ans = min(ans, i)
+        ans = i
+        break
 
 print(ans)
 
