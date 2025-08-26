@@ -1,29 +1,23 @@
 n = int(input())
-seats = list(map(int, list(input())))
-ans = 0
+seat = list(input())
 
-def get_closest(seats):
-    seated = []
-    ans = len(seats)
-    for i in range(len(seats)):
-        if seats[i] == 1:
-            seated.append(i)
+
+def min_dist():
+    dist = n
+    for i in range(n):
+        for j in range(i + 1, n):
+            if seat[i] == '1' and seat[j] == '1':
+                dist = min(dist, j - i)
     
-    for i in range(1, len(seated)):
-        ans = min(ans, seated[i] - seated[i-1])
+    return dist
 
-    return ans
 
-for i in range(len(seats)-1):
-    test = seats[:]
-    if test[i] == 0:
-        test[i] = 1
-        for j in range(i+1, len(seats)):
-            if test[j] == 0:
-                test[j] = 1
-                dist = get_closest(test)
-                # print(i, j, test)
-                ans = max(ans, dist)
-                test[j] = 0
+ans = 0
+for i in range(n):
+    for j in range(i + 1, n):
+        if seat[i] == '0' and seat[j] == '0':
+            seat[i] = seat[j] = '1'
+            ans = max(ans, min_dist())
+            seat[i] = seat[j] = '0'
 
 print(ans)
