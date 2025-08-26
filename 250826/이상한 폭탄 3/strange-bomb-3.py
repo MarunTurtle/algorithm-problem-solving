@@ -3,6 +3,7 @@ bombs = [int(input()) for _ in range(n)]
 
 bomb_num = 0
 bomb_cnt = 0
+bomb_exploded = [0] * n
 
 def explode(x, bomb_exploded):
     if x == n-1:
@@ -15,9 +16,13 @@ def explode(x, bomb_exploded):
     return bomb_exploded
 
 for i in range(n):
-    bomb_exploded = [0] * n
     bomb_exploded = explode(i, bomb_exploded)
-    cur_bomb_cnt = bomb_exploded.count(1)
+    cur_bomb_cnt = 0
+
+    for j in range(n):
+        if bomb_exploded[j] == 1 and bombs[j] == bombs[i]:
+            cur_bomb_cnt += 1
+
     if cur_bomb_cnt > bomb_cnt:
         bomb_num = bombs[i]
         bomb_cnt = cur_bomb_cnt
