@@ -1,42 +1,27 @@
-import itertools
+from collections import Counter
+from itertools import combinations
 
 nums = list(map(int, input().split()))
 nums.sort()
 
-def contain_all(num_list, test):
-    for x, y in list(itertools.combinations(num_list, 2)):
-        if x + y in test:
-            test.remove(x+y)
-        else:
-            return False
-    for x, y, z in list(itertools.combinations(num_list, 3)):
-        if x + y + z in test:
-            test.remove(x+y+z)
-        else:
-            return False
-    return True
+target = Counter(nums)  # 정답 멀티셋
 
-# a, b, c, d
-# a + b, b + c, c + d, d + a, a + c, b + d
-# a + b + c, a + b + d, a + c + d, b + c + d
-# a + b + c + d
-for i in range(11):
-    for j in range(i+1, 12):
-        for k in range(j+1, 13):
-            for l in range(k+1, 14):
-                test = nums[:14]
-                a = nums[i]
-                b = nums[j]
-                c = nums[k]
-                d = nums[l]
-                test.remove(a)
-                test.remove(b)
-                test.remove(c)
-                test.remove(d)
-                if nums[14] != a + b + c + d:
-                    continue
-                if not contain_all([a, b, c, d], test):
-                    continue
-                print(a, b, c, d)
-                break
+def build_multiset(a, b, c, d):
+    vals = [a, b, c, d,
+            a+b, b+c, c+d, d+a,
+            a+c, b+d,
+            a+b+c, a+b+d, a+c+d, b+c+d,
+            a+b+c+d]
+    return Counter(vals)
 
+# 마지막 값은 a+b+c+d 여야 함
+total = nums[-1]
+
+# 인덱스 0~13 중에서 4개 골라 단일 후보 구성
+for i, j, k, l in combinations(range(14), 4):
+    a, b, c, d = nums[i], nums[j], nums[k], nums[l]
+    if a + b + c + d != total:
+        continue
+    if build_multiset(a, b, c, d) == target:
+        print(a, b, c, d)
+        break
