@@ -1,27 +1,31 @@
-from itertools import combinations
 
 n, m = map(int, input().split())
 arr = list(map(int, input().split()))
 
-# 칸막이 후보 인덱스 (0 ~ n-2) 중에서 m-1개 선택
-positions = range(1, n)  # 칸막이는 숫자 사이에 설치하므로 1부터 n-1까지
+def can_divide(limit):
+    """limit 이하로 구간 합을 유지하며 나눌 수 있는지 검증"""
+    cnt = 1  # 구간 개수
+    curr_sum = 0
 
-answer = float('inf')
+    for num in arr:
+        if curr_sum + num > limit:
+            cnt += 1
+            curr_sum = num
+        else:
+            curr_sum += num
+    return cnt <= m
 
-# 모든 칸막이 조합에 대해 탐색
-for cuts in combinations(positions, m - 1):
-    cuts = list(cuts)
-    cuts.append(n)  # 마지막 구간을 위해 끝 추가
-    
-    prev = 0
-    max_sum = 0
-    
-    # 구간 합 계산
-    for cut in cuts:
-        segment_sum = sum(arr[prev:cut])
-        max_sum = max(max_sum, segment_sum)
-        prev = cut
-    
-    answer = min(answer, max_sum)
+left = max(arr)        # 최소 가능한 최댓값
+right = sum(arr)       # 최대 가능한 최댓값
+answer = right
+
+while left <= right:
+    mid = (left + right) // 2
+
+    if can_divide(mid):
+        answer = mid
+        right = mid - 1
+    else:
+        left = mid + 1
 
 print(answer)
