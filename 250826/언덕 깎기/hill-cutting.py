@@ -3,19 +3,18 @@ input = sys.stdin.readline
 
 n = int(input())
 hills = [int(input()) for _ in range(n)]
-hills.sort()
 
-lowest = hills[0]
-highest = hills[-1]
-diff = highest - lowest - 17
+min_total = sys.maxsize
 
-min_ans = sys.maxsize
+for i in range(1, 84):
+    total = 0
+    for hill in hills:
+        if i > hill:
+            total += (i - hill) ** 2
+        elif i + 17 < hill:
+            total += (hill - i - 17) ** 2
+        else:
+            continue
+    min_total = min(min_total, total)
 
-for i in range(diff):
-    a = i
-    b = diff - i
-    min_ans = min(min_ans, a**2 + b**2)
-
-
-
-print(min_ans)
+print(min_total)
