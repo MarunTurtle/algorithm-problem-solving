@@ -7,16 +7,16 @@ min_v = min(x1)
 max_v = max(x2)
 
 def is_intersecting(min_v, max_v):
-    for i in range(min_v, max_v + 1):
+    for line in range(min_v, max_v + 1):
+        count = 0
         for j in range(n):
-            count = 0
-            if x1[j] <= i <= x2[j]:
+            if x1[j] <= line <= x2[j]:
                 count += 1
         if count == n:
             return True
     return False
 
-if is_intersecting:
+if is_intersecting(min_v, max_v):
     print('Yes')
 else:
     print('No')
