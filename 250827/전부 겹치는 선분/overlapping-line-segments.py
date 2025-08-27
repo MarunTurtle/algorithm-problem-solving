@@ -1,22 +1,18 @@
+import sys
+
+INT_MAX = sys.maxsize
+
 n = int(input())
-segments = [tuple(map(int, input().split())) for _ in range(n)]
-x1, x2 = zip(*segments)
-x1, x2 = list(x1), list(x2)
 
-min_v = min(x1)
-max_v = max(x2)
+max_x1 = 0
+min_x2 = INT_MAX
 
-def is_intersecting(min_v, max_v):
-    for line in range(min_v, max_v + 1):
-        count = 0
-        for j in range(n):
-            if x1[j] <= line <= x2[j]:
-                count += 1
-        if count == n:
-            return True
-    return False
-
-if is_intersecting(min_v, max_v):
-    print('Yes')
+for _ in range(n):
+    x1, x2 = tuple(map(int, input().split()))
+    max_x1 = max(max_x1, x1)
+    min_x2 = min(min_x2, x2)
+    
+if min_x2 >= max_x1:
+    print("Yes")
 else:
-    print('No')
+    print("No")
