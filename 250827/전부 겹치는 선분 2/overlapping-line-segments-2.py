@@ -15,7 +15,7 @@ def is_possible():
             min_v = min(x2[j], min_v)
             max_v = max(x1[j], max_v)
         
-        if min_v <= max_v:
+        if min_v >= max_v:
             return True
     return False
 
