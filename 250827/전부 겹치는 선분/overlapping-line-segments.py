@@ -8,8 +8,8 @@ max_v = max(x2)
 
 def is_intersecting(min_v, max_v):
     for i in range(min_v, max_v + 1):
-        count = 0
         for j in range(n):
+            count = 0
             if x1[j] <= i <= x2[j]:
                 count += 1
         if count == n:
