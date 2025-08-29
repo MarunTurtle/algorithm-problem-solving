@@ -16,7 +16,7 @@ for i in range(n, 0, -1):
                 need_to_move -= moving
                 need[j] += moving
                 ans += moving * (i - j)
-    need[i] = need_to_move
+        need[i] = need_to_move
     
 print(ans)
         
