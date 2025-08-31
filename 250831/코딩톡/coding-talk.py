@@ -10,4 +10,7 @@ for i in range(p, m+1):
     if devs[i] in dev_list:
         dev_list.remove(devs[i])
 
-print(*dev_list)
+if unreads[p] == 0:
+    print()
+else:
+    print(*dev_list)
