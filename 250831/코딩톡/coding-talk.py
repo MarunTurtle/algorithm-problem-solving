@@ -4,11 +4,12 @@ n, m, p = map(int, input().split())
 arr = [0] + [tuple(input().split()) for _ in range(m)]
 devs = [0] + [arr[i][0] for i in range(1, m+1)]
 unreads = [0] + [int(arr[i][1]) for i in range(1, m+1)]
-dev_list = [chr(ord('A') + i) for i in range(n)]
+dev_list = [chr(ord('A')+i) for i in range(n)]
 
-for i in range(p, m+1):
-    if devs[i] in dev_list:
-        dev_list.remove(devs[i])
+for i in range(0, m+1):
+    if unreads[p] <= unreads[i]:
+        if devs[i] in dev_list:
+            dev_list.remove(devs[i])
 
 if unreads[p] == 0:
     print()
