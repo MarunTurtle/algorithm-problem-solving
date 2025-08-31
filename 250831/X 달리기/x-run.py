@@ -1,9 +1,9 @@
-target_distance = 6368
+target_distance = int(input())
 
 def total_distance_with(n):
     return ((n * (n+1)) // 2) + (((n - 1) * (n)) // 2)
 
-top_speed = 74
+top_speed = 1
 remaining_distance = 0
 ans = float('inf')
 
