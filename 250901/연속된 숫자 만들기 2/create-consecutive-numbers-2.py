@@ -6,6 +6,8 @@ diff23 = pos[2] = pos[1]
 
 if diff12 == 1 and diff23 == 1:
     print(0)
+elif diff12 == 2 or diff23 == 2:
+    print(1)
 elif diff12 == 1 or diff23 == 1:
     print(1)
 else:
