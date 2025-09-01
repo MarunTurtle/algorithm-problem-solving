@@ -1,5 +1,6 @@
 n = 3
 pos = list(map(int, input().split()))
+pos.sort()
 
 diff12 = pos[1] - pos[0]
 diff23 = pos[2] - pos[1]
