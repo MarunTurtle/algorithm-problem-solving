@@ -2,7 +2,7 @@ n = 3
 pos = list(map(int, input().split()))
 
 diff12 = pos[1] - pos[0]
-diff23 = pos[2] = pos[1]
+diff23 = pos[2] - pos[1]
 
 if diff12 == 1 and diff23 == 1:
     print(0)
