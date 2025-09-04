@@ -9,19 +9,19 @@ def count_min_dist(seats):
     can_start = False 
     for i in range(n):
         if i == 0:
-            if seats[i] == 0:
-                can_start = False
-                continue
-            else:
+            if seats[i] == 1:
                 can_start = True
-        elif seats[i] == 1:
+            continue
+        
+        if seats[i] == 1:
             count += 1
             can_start = True
             diffs.append(count)
             count = 0
-        elif can_start:
+        if can_start:
             if seats[i] == 0:
                 count += 1
+
     return min(diffs)
 
 for i in range(n):
