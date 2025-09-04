@@ -1,6 +1,6 @@
 n = int(input())
 seats = list(map(int, list(input())))
-ans = 0 
+f_ans = 0 
 
 def count_min_dist(seats):
     ans = 0
@@ -27,7 +27,7 @@ def count_min_dist(seats):
 for i in range(n):
     if seats[i] == 0:
         seats[i] = 1
-        ans = max(ans, count_min_dist(seats))
+        f_ans = max(f_ans, count_min_dist(seats))
         seats[i] = 0
 
-print(ans)
+print(f_ans)
