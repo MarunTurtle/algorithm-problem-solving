@@ -14,10 +14,11 @@ def count_min_dist(seats):
             continue
         
         if seats[i] == 1:
-            count += 1
+            if can_start:
+                count += 1 
+                diffs.append(count)
+                count = 0
             can_start = True
-            diffs.append(count)
-            count = 0
         if can_start:
             if seats[i] == 0:
                 count += 1
