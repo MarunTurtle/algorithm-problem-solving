@@ -21,12 +21,14 @@ def count_min_dist(seats):
         if can_start:
             if seats[i] == 0:
                 count += 1
-
+    print(diffs)
     return min(diffs)
 
 for i in range(n):
     if seats[i] == 0:
         seats[i] = 1
+        print(f"r: {i} seats: {seats}")
+        print(count_min_dist(seats))
         f_ans = max(f_ans, count_min_dist(seats))
         seats[i] = 0
 
