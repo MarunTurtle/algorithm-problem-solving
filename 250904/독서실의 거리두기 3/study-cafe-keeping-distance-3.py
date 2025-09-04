@@ -11,4 +11,4 @@ for i in range(n):
         cur_count = 0
 
 count.sort(reverse=True)
-print(count[0]-1)
+print((count[0]+1)//2)
