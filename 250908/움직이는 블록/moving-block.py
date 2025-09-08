@@ -1,22 +1,16 @@
 n = int(input())
 blocks = [int(input()) for _ in range(n)]
 blocks.sort(reverse=True)
-ans = 0
+ans = float('inf')
 
-def is_equal():
-    prev_block = blocks[0]
-    for i in range(1, n):
-        if blocks[i] != prev_block:
-            return False
-    return True
+min_num = blocks[n-1]
+max_num = blocks[0]
 
-while True:
-    if is_equal():
-        break
-    
-    ans += 1
-    blocks[0] -= 1
-    blocks[n-1] += 1
-    blocks.sort(reverse=True)
+for mean in range(min_num, max_num+1):
+    total = 0
+    for number in blocks:
+        total += abs(mean - number)
+
+    ans = min(ans, total//2)
 
 print(ans)
