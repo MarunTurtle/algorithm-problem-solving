@@ -23,9 +23,9 @@ elif int_arr[2] == 0 and int_arr[1] == 0:
 elif int_arr[0] == 0:
     ans = sort_arr[0] * sort_arr[1] * sort_arr[2]
 elif int_arr[2] == 1:
-    ans = arr[0] * arr[n-1] * arr[n-2]
+    ans = sort_arr[0] * sort_arr[n-1] * sort_arr[n-2]
 elif int_arr[0] == 1:
-    ans = arr[0] * arr[1] * arr[2]
+    ans = sort_arr[0] * sort_arr[1] * sort_arr[2]
 else: 
     ans_sub_1 = sort_arr[0] * sort_arr[1] * sort_arr[2]
     ans_sub_2 = sort_arr[n-1] * sort_arr[n-2] * sort_arr[0]
