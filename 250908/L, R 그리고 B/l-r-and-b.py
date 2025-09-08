@@ -9,4 +9,4 @@ for i in range(10):
         elif board[i][j] == 'L':
             l = [i, j]
 
-print(abs(1 + b[0] - l[0] + b[1] - l[1]))
+print(abs(b[0] - l[0]) + abs(b[1] - l[1]) - 1)
