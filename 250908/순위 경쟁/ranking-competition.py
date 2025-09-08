@@ -1,7 +1,7 @@
 n = int(input())
 c, s = [], []
 
-hall_of_fame = set()
+hall_of_fame = set(['A', 'B', 'C'])
 count = 0
 
 cur_scores = [0, 0, 0]
