@@ -6,11 +6,16 @@ ans = float('inf')
 min_num = blocks[n-1]
 max_num = blocks[0]
 
-for mean in range(min_num, max_num+1):
-    total = 0
-    for number in blocks:
-        total += abs(mean - number)
+total_sum = 0
+for i in range(n):
+    total_sum += blocks[i]
 
-    ans = min(ans, total//2)
+mean = total_sum // n
+
+total = 0
+for number in blocks:
+    total += abs(mean - number)
+
+ans = min(ans, total//2)
 
 print(ans)
