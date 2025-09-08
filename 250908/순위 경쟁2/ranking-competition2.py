@@ -11,6 +11,13 @@ for i in range(n):
         a += score
     else:
         b += score
+
+    if a > b:
+        cur_winner = 1
+    elif a < b:
+        cur_winner = 2
+    else:
+        cur_winner = 0  
     
     if cur_winner != prev_winner:
         count += 1
