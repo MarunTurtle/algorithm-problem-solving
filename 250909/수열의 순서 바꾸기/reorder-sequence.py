@@ -1,9 +1,9 @@
 n = int(input())
-a = list(map(int, input().split()))
-b = sorted(a)
+arr = list(map(int, input().split()))
 
-j = n - 1
-for i in range(n - 1, -1, -1):
-    if a[i] == b[j]:
-        j -= 1
-print(j + 1)  # 최소 이동 횟수
+expected = n
+for x in reversed(arr):
+    if x == expected:
+        expected -= 1
+
+print(expected)
