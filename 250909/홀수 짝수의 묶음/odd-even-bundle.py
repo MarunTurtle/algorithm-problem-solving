@@ -1,48 +1,30 @@
 n = int(input())
 numbers = list(map(int, input().split()))
 
-even = 0
-odd = 0
-even_or_odd = 0
+even = sum(1 for x in numbers if x % 2 == 0)
+odd = n - even
+
 count = 0
+turn = 0  # 0 = 짝수 차례, 1 = 홀수 차례
 
-for i in range(n):
-    if numbers[i] % 2 == 0:
-        even += 1
-    else:
-        odd += 1
-
-while even > 0 or odd > 0:
-    if even == 1 and odd == 0 and even_or_odd == 1:
-        even -= 1
-        break
-    elif even == 0 and odd == 1 and even_or_odd == 0:
-        odd -= 1
-        count -= 1
-        break
-    elif even == 0 and odd == 2:
-        if even_or_odd == 0:
-            odd -= 2
-            count += 1
-            break
-        elif even_or_odd == 1:
-            odd -= 2
-            break
-
-    if even_or_odd == 0:
+while True:
+    if turn == 0:  # 짝수 차례
         if even > 0:
             even -= 1
-            count += 1
-            even_or_odd = 1 - even_or_odd
         elif odd >= 2:
             odd -= 2
-            count += 1
-            even_or_odd = 1 - even_or_odd
-    elif even_or_odd == 1:
-        if odd > 0: 
+        else:
+            break
+    else:  # 홀수 차례
+        if odd > 0:
             odd -= 1
-            count += 1
-            even_or_odd = 1 - even_or_odd
+        else:
+            break
+    count += 1
+    turn ^= 1  # 짝↔홀 토글
 
+# 마무리: 홀수 하나만 남으면 마지막 두 묶음을 합쳐야 함
+if odd == 1:
+    count -= 1
 
 print(count)
