@@ -17,7 +17,7 @@ e.sort()
 ans1 = abs(min(s) - max(e))
 # print(ans1)
 
-print("-----")
+# print("-----")
 segments.sort(key = lambda x:x[1])
 option2 = list(segments)
 # print(option2)
