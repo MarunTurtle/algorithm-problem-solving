@@ -2,6 +2,7 @@ n,m = map(int, input().split())
 str = input()
 idx = n+1
 maxidx = n+1
+
 for i in range(m):
     com = input()
     if com[0] == 'P':
@@ -22,6 +23,6 @@ for i in range(m):
             if idx == maxidx:
                 continue
             else:
-                str = str[:idx - 1:] + str[idx::]
+                str = str[:idx - 1] + str[idx:]
                 maxidx -= 1
 print(str)
