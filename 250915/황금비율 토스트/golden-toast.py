@@ -18,6 +18,9 @@ for i in range(m):
             if idx != maxidx:
                 idx += 1
         else:
-            str = str[:idx - 1] + str[idx:]
-            maxidx -= 1
+            if idx == maxidx:
+                continue
+            else:
+                str = str[:idx - 1] + str[idx:]
+                maxidx -= 1
 print(str)
