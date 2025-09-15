@@ -82,7 +82,7 @@ class DoublyLinkedList:
         return self.node_num
 
     def empty(self):
-        return 0
+        return 1 if self.node_num == 0 else 0
 
     def front(self):
         if self.head == None:
