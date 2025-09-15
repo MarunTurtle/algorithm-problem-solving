@@ -12,13 +12,11 @@ for i in range(m):
         idx += 1
     else:
         if com == 'L':
-            idx -= 1
-            if idx < 1:
-                idx = 1
+            if idx != 0:
+                idx -= 1
         elif com == 'R':
-            idx += 1
-            if idx > maxidx:
-                idx = maxidx
+            if idx != maxidx:
+                idx += 1
         else:
             if idx == maxidx:
                 continue
