@@ -1,34 +1,32 @@
-n, m = map(int, input().split())
+blocks = [
+    # ㄴ자 모양 (4방향)
+    [(0,0),(1,0),(0,1)],
+    [(0,0),(1,0),(1,1)],
+    [(0,0),(0,1),(-1,1)],
+    [(0,0),(0,1),(1,1)],
+
+    # 일자 모양 (가로, 세로)
+    [(0,0),(0,1),(0,2)],
+    [(0,0),(1,0),(2,0)]
+]
+
+n, m = list(map(int, input().split()))
 grid = [list(map(int, input().split())) for _ in range(n)]
+
 ans = 0
-def get_sum_1(r, c):
-    max_total = 0
-    if r + 2 <= n-1:
-        total = 0
-        for i in range(3):
-            total += grid[r+i][c]  
-        max_total = max(max_total, total)
-    if c + 2 <= m-1:
-        total = 0
-        for i in range(3):
-            total += grid[r][c+i]
-        max_total = max(max_total, total)
-    return max_total
+for i in range(n):
+    for j in range(m):
+        for block in blocks:
+            s = 0
+            valid = True
+            for dr, dc in block:
+                nr, nc = i + dr, j + dc
+                if 0 <= nr < n and 0 <= nc < m:
+                    s += grid[nr][nc]
+                else:
+                    valid = False
+                    break
+            if valid:
+                ans = max(ans, s)
 
-def get_sum_2(r, c):
-    max_total = 0
-    if r + 1 <= n-1 and c + 1 <= m-1:
-        four_sum = 0
-        min_elem = float('inf')
-        for i in range(2):
-            for j in range(2):
-                four_sum += grid[r+i][c+j]
-                min_elem = min(min_elem, grid[r+i][c+j])
-        max_total = four_sum - min_elem
-    return max_total
-
-for r in range(n):
-    for c in range(m):
-        ans = max(ans, max(get_sum_1(r, c), get_sum_2(r, c)))
-        
 print(ans)
