@@ -3,12 +3,13 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 ans = 0
 def get_sum_1(r, c):
     max_total = 0
-    total = 0
     if r + 2 <= n-1:
+        total = 0
         for i in range(3):
             total += grid[r+i][c]  
         max_total = max(max_total, total)
     if c + 2 <= m-1:
+        total = 0
         for i in range(3):
             total += grid[r][c+i]
         max_total = max(max_total, total)
@@ -30,3 +31,4 @@ for r in range(n):
     for c in range(m):
         ans = max(ans, max(get_sum_1(r, c), get_sum_2(r, c)))
         
+print(ans)
