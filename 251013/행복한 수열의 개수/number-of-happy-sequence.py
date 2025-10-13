@@ -4,22 +4,15 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 ans = 0
 
 def is_happy(nums):
-    max_count = 0
+    max_count = 1
     cur_count = 1
-    cur_num = nums[0]
-    if n == 1:
-        max_count = 1
-    else: 
-        for i in range(1, n):
-            if nums[i] == cur_num:
-                cur_count += 1
-            else:
-                cur_count = 1
-                cur_num = nums[i]
-            max_count = max(max_count, cur_count)
-    if max_count >= m:
-        return True
-    return False
+    for i in range(1, n):
+        if nums[i-1] == nums[i]:
+            cur_count += 1
+        else:
+            cur_count = 1
+        max_count = max(max_count, cur_count)
+    return max_count >= m:
 
 for x in range(n):
     nums = [grid[x][i] for i in range(n)]
