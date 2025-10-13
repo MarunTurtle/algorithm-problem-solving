@@ -12,7 +12,8 @@ def is_happy(nums):
         else:
             cur_count = 1
         max_count = max(max_count, cur_count)
-    return max_count >= m:
+    
+    return max_count >= m
 
 for x in range(n):
     nums = [grid[x][i] for i in range(n)]
