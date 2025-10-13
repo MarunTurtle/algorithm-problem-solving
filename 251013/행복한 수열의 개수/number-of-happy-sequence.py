@@ -7,13 +7,16 @@ def is_happy(nums):
     max_count = 0
     cur_count = 1
     cur_num = nums[0]
-    for i in range(1, n):
-        if nums[i] == cur_num:
-            cur_count += 1
-        else:
-            cur_count = 1
-            cur_num = nums[i]
-        max_count = max(max_count, cur_count)
+    if n == 1:
+        max_count = 1
+    else: 
+        for i in range(1, n):
+            if nums[i] == cur_num:
+                cur_count += 1
+            else:
+                cur_count = 1
+                cur_num = nums[i]
+            max_count = max(max_count, cur_count)
     if max_count >= m:
         return True
     return False
