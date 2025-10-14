@@ -1,7 +1,7 @@
 n, m = map(int, input().split())
 grid = [list(map(int, input().split())) for _ in range(n)]
 
-ans = 0
+ans = -1
 
 for r1 in range(n):
     for c1 in range(m):
