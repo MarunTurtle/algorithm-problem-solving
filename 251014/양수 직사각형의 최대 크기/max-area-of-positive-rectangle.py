@@ -23,7 +23,7 @@ max_area = -1
 for r1 in range(1, n+1):
     for c1 in range(1, m+1):
         for r2 in range(r1, n + 1):
-            for c2 in range(r2, m + 1):
+            for c2 in range(c1, m + 1):
                 total = (
                     prefix[r2][c2]                    
                     - prefix[r1-1][c2]
