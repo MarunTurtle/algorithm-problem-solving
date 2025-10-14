@@ -18,7 +18,7 @@ for i in range(1, n+1):
 
 
 # 2개의 지점(좌상, 우하)를 잡아서 prefix-sum과 실제 넓이 비교 후 같으면 max-sum 업데이트
-max_area = 0
+max_area = -1
 
 for r1 in range(1, n+1):
     for c1 in range(1, m+1):
