@@ -2,10 +2,8 @@ a = input()
 n = len(a)
 # Please write your code here.
 
-def shift(a):
-    end = a[-1]
-    a = end + a[:n-1]
-    return a
+def shift(a): 
+    return a[-1] + a[:-1]
 
 def get_run_length(a):
     cur_char = a[0]
@@ -22,8 +20,7 @@ def get_run_length(a):
     return len(code)
 
 ans = get_run_length(a)
-
-for i in range(n-1):
+for i in range(n):
     a = shift(a)
     ans = min(ans, get_run_length(a))
 
