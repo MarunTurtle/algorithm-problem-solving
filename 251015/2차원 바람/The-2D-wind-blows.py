@@ -34,7 +34,7 @@ def rotate(r1, c1, r2, c2):
 
 
 # 주변 평균을 반환하는 함수
-def get_average(r, c):
+def get_average(r, c, grid):
     total = grid[r][c]
     dividend = 1
     for i in range(4):
@@ -56,20 +56,20 @@ for r1, c1, r2, c2 in winds:
     r2 -= 1
     c2 -= 1
     rotate(r1, c1, r2, c2)
-
-    # 건물 상태 출력 
+    
     tmp_grid = [[0]*m for _ in range(n)]
+    # 건물 상태 출력 
+    for i in range(n):
+        for j in range(m):
+            tmp_grid[i][j] = grid[i][j]
+
     for i in range(n):
         for j in range(m):
             if r1 <= i <= r2 and c1 <= j <= c2:
-                tmp_grid[i][j] = get_average(i, j)
+                grid[i][j] = get_average(i, j, tmp_grid)
             else:
-                tmp_grid[i][j] = grid[i][j]
+                grid[i][j] = tmp_grid[i][j]
     
-    for i in range(n):
-        for j in range(m):
-            grid[i][j] = tmp_grid[i][j]
-
 # 건물 상태 출력
 for row in grid:
     print(*row)
