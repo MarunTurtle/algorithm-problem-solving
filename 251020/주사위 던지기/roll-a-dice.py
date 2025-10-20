@@ -4,11 +4,7 @@ grid = [[0]*n for _ in range(n)]
 r -= 1
 c -= 1
 
-dice_cross = [
-    [0, 5, 0],
-    [4, 6, 3],
-    [0, 2, 0]
-]
+front, right, bottom = 2, 3, 6
 
 dr = [0, 0, -1, 1]
 dc = [-1, 1, 0, 0]
@@ -20,44 +16,34 @@ dirs = {
 }
 
 def move_dice_cross(dir):
+    global front, right, bottom
     if dir == "L":
-        dice_cross[1][2] = dice_cross[1][1]
-        dice_cross[1][1] = dice_cross[1][0]
-        dice_cross[1][0] = 7 - dice_cross[1][2]
+        front, right, bottom = front, bottom, 7 - right
     elif dir == "R":
-        dice_cross[1][0] = dice_cross[1][1]
-        dice_cross[1][1] = dice_cross[1][2]
-        dice_cross[1][2] = 7 - dice_cross[1][0]
+        front, right, bottom = front, 7 - bottom, right 
     elif dir == "U":
-        dice_cross[2][1] = dice_cross[1][1]
-        dice_cross[1][1] = dice_cross[0][1]
-        dice_cross[0][1] = 7 - dice_cross[2][1]
+        front, right, bottom = bottom, right, 7 - front
     else:
-        dice_cross[0][1] = dice_cross[1][1]
-        dice_cross[1][1] = dice_cross[2][1]
-        dice_cross[2][1] = 7 - dice_cross[0][1]
-
-def get_dice_bottom():
-    return dice_cross[1][1]
+        front, right, bottom = 7 - bottom, right, front 
 
 def get_dice_num(d):
     if d == 'L':
         move_dice_cross('L')
-        return get_dice_bottom()
+        return bottom
     if d =='R':
         move_dice_cross('R')
-        return get_dice_bottom()
+        return bottom
     if d == 'U':
         move_dice_cross('U')
-        return get_dice_bottom()
+        return bottom
     if d == 'D':
         move_dice_cross('D')
-        return get_dice_bottom()
+        return bottom
 
 def in_range(r, c):
     return 0 <= r < n and 0 <= c < n
 
-grid[r][c] = get_dice_bottom()
+grid[r][c] = bottom
 
 for d in directions:
     nr = r + dr[dirs[d]]
