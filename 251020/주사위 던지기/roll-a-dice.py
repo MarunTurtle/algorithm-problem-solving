@@ -55,6 +55,6 @@ for d in directions:
     else:
         continue
 
-ans = sum(grid[i][j] if grid[i][j] else 0 for i in range(n) for j in range(n))
+ans = sum(grid[i][j] for i in range(n) for j in range(n))
 
 print(ans)
