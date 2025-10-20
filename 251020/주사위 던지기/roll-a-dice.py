@@ -17,14 +17,15 @@ dirs = {
 
 def move_dice_cross(dir):
     global front, right, bottom
+
     if dir == "L":
-        front, right, bottom = front, bottom, 7 - right
+        right, bottom = bottom, 7 - right
     elif dir == "R":
-        front, right, bottom = front, 7 - bottom, right 
+        right, bottom = 7 - bottom, right 
     elif dir == "U":
-        front, right, bottom = bottom, right, 7 - front
+        front, bottom = bottom, 7 - front
     else:
-        front, right, bottom = 7 - bottom, right, front 
+        front, bottom = 7 - bottom, front 
 
 def get_dice_num(d):
     if d == 'L':
