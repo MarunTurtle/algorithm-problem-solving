@@ -26,17 +26,20 @@ def move_dice_cross(dir):
         front, bottom = bottom, 7 - front
     else:
         front, bottom = 7 - bottom, front 
-    return bottom
 
 def get_dice_num(d):
     if d == 'L':
-        return move_dice_cross('L')
+        move_dice_cross('L')
+        return bottom
     if d =='R':
-        return move_dice_cross('R')
+        move_dice_cross('R')
+        return bottom
     if d == 'U':
-        return move_dice_cross('U')
+        move_dice_cross('U')
+        return bottom
     if d == 'D':
-        return move_dice_cross('D')
+        move_dice_cross('D')
+        return bottom
 
 def in_range(r, c):
     return 0 <= r < n and 0 <= c < n
