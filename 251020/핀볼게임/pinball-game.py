@@ -34,6 +34,8 @@ for start_point in start_points:
     r, c, d = start_point
     # print(f"new start: {r, c}")
     count = 1
+    if grid[r][c] != 0:
+        d = turn(d, grid[r][c])
     while True:
         # print(f"{r, c}")
         nr = r + dr[d]
