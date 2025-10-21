@@ -23,15 +23,17 @@ def move(r, c, d):
 
 def simulate(grid):
     tmp_grid = [['O']*n for _ in range(n)]
+    arrival = [[0]*n for _ in range(n)]
     for i in range(n):
         for j in range(n):
             if grid[i][j] != 'O':
                 r, c, d = move(i, j, grid[i][j])
-                if tmp_grid[r][c] != 'O':                   
-                    tmp_grid[r][c] = 'O'
-                else:
+                if arrival[r][c] == 0:
+                    arrival[r][c] += 1
                     tmp_grid[r][c] = d
-    return tmp_grid[:]
+                else:
+                    tmp_grid[r][c] = 'O'
+    return tmp_grid
 
 def compare_count(arr1, arr2):
     a = sum(1 if arr1[i][j] != 'O' else 0 for i in range(n) for j in range(n))
@@ -61,6 +63,6 @@ for i in range(T):
             count += 1
         else:
             count = 0
-        grid = tmp_grid[:]
+        grid = tmp_grid
 
     print(sum(1 if grid[i][j] != 'O' else 0 for i in range(n) for j in range(n)))
