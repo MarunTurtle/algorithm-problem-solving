@@ -52,7 +52,7 @@ for i in range(T):
 
     # 한바퀴 돌기
     count = 0
-    while count < 2*n:
+    while count < 3*n:
         tmp_grid = simulate(grid)
         # for row in grid:
         #     print(*row)
