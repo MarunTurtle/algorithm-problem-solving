@@ -53,16 +53,7 @@ for i in range(T):
     # print("-----")
 
     # 한바퀴 돌기
-    count = 0
-    while count < 2*n:
-        tmp_grid = simulate(grid)
-        # for row in grid:
-        #     print(*row)
-        # print("-----")
-        if compare_count(grid, tmp_grid):
-            count += 1
-        else:
-            count = 0
-        grid = tmp_grid
-
+    for k in range(2*n):
+        grid = simulate(grid)
+        
     print(sum(1 if grid[i][j] != 'O' else 0 for i in range(n) for j in range(n)))
