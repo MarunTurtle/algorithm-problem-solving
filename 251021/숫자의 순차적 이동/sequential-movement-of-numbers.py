@@ -41,4 +41,4 @@ for t in range(m):
         simulate(r, c)
 
 for row in grid:
-    print(' '.join(map(str, row)))
+    print(*row)
