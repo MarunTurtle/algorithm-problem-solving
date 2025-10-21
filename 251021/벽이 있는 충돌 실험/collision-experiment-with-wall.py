@@ -32,7 +32,12 @@ def simulate(grid):
                 else:
                     tmp_grid[r][c] = d
     return tmp_grid
-                
+
+def compare_count(arr1, arr2):
+    a = sum(1 if arr1[i][j] != 'O' else 0 for i in range(n) for j in range(n))
+    b = sum(1 if arr2[i][j] != 'O' else 0 for i in range(n) for j in range(n))
+    return a == b
+
 # Simulation 
 for i in range(T):
     n, m = map(int, input().split())
@@ -46,10 +51,14 @@ for i in range(T):
     # print("-----")
 
     # 한바퀴 돌기
-    for k in range(2*n):
-        grid = simulate(grid)
+    count = 0
+    while count < 2*n:
+        tmp_grid = simulate(grid)
         # for row in grid:
         #     print(*row)
         # print("-----")
-        
+        if compare_count(grid, tmp_grid):
+            count += 1
+        grid = tmp_grid
+
     print(sum(1 if grid[i][j] != 'O' else 0 for i in range(n) for j in range(n)))
