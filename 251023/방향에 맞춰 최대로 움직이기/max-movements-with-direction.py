@@ -1,76 +1,33 @@
-n = int(input())
+n = int(input().strip())
 grid = [list(map(int, input().split())) for _ in range(n)]
 move_dir = [list(map(int, input().split())) for _ in range(n)]
 r, c = map(int, input().split())
 r -= 1
 c -= 1
 
-# Please write your code here.
+dr = [-1, -1,  0, 1, 1, 1,  0, -1]
+dc = [ 0,  1,  1, 1, 0, -1, -1, -1]
+
 ans = 0
-path = [(r, c)]
 
-def in_range(r, c):
-    return 0 <= r < n and 0 <= c < n
+def in_range(x, y):
+    return 0 <= x < n and 0 <= y < n
 
-def get_movable_pos(r, c):
-    d = move_dir[r][c]
-    v = grid[r][c]
-    movable_pos = []
+def find_max(x, y, cnt):
+    global ans
+    if cnt > ans:
+        ans = cnt
 
-    def is_greater(r, c, nr, nc):
-        return grid[r][c] < grid[nr][nc]
+    d = move_dir[x][y] - 1  # 0-index 방향
+    cx, cy = x, y
+    # 해당 방향으로 직선상 모든 칸을 스캔하며, 값이 더 큰 칸으로만 이동
+    while True:
+        cx += dr[d]
+        cy += dc[d]
+        if not in_range(cx, cy):
+            break
+        if grid[cx][cy] > grid[x][y]:
+            find_max(cx, cy, cnt + 1)
 
-    if d == 1:
-        for i in range(1, r+1):
-            movable_pos.append((r - i, c))
-    elif d == 2:
-        for i in range(1, min(r+1, n-c)):
-            movable_pos.append((r - i, c + i))
-    elif d == 3:
-        for i in range(1, n - c):
-            movable_pos.append((r, c + i))
-    elif d == 4:
-        for i in range(1, min(n - r, n - c)):
-            movable_pos.append((r + i, c + i))
-    elif d == 5:
-        for i in range(1, n - r):
-            movable_pos.append((r + i, c))
-    elif d == 6:
-        for i in range(1, min(n-r, c+1)):
-            movable_pos.append((r + i, c - i))
-    elif d == 7:
-        for i in range(1, c+1):
-            movable_pos.append((r, c - i))
-    else:
-        for i in range(1, min(r + 1, c + 1)):
-            movable_pos.append((r - i, c - i))
-        
-    final_pos = []
-
-    for pos in movable_pos:
-        if is_greater(r, c, pos[0], pos[1]):
-            final_pos.append(pos)
-
-    return final_pos 
-
-
-def backtrack(depth):
-    global ans, r, c
-
-    ans = max(ans, len(path)-1)
-
-    if depth == n*n:
-        return
-    
-    r, c = path[-1]
-
-    movable_pos = get_movable_pos(r, c)
-
-    for pos in movable_pos:
-        path.append(pos)
-        backtrack(depth + 1)
-        path.pop()
-
-
-backtrack(0)
+find_max(r, c, 0)
 print(ans)
