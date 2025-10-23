@@ -17,12 +17,12 @@ def backtrack(turn):
         return
         
     for i in range(K):
-        # if moves[i] >= M:
-        #     continue
+        if moves[i] >= M:
+            continue
         moves[i] += orders[turn]
         backtrack(turn+1)
         moves[i] -= orders[turn]
-    
+    backtrack(turn + 1)
 
 
 backtrack(0)
