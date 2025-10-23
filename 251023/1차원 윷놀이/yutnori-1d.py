@@ -20,7 +20,7 @@ def backtrack(turn):
         return
     
     for i in range(K):
-        if moves[i] >= M:
+        if pos(i) >= M:
             continue
         moves[i].append(orders[turn])
         backtrack(turn+1)
