@@ -4,10 +4,13 @@ N, M, K = map(int, input().split())
 orders = list(map(int, input().split()))
 
 total = 0
-moves = [1 for _ in range(K)]
+moves = [[1] for _ in range(K)]
+
+def pos(i):
+    return sum(moves[i])
 
 def calc():
-    return sum(1 for x in moves if x >= M)
+    return sum(1 if pos(i) >= M for i in range(K))
 
 def backtrack(turn):
     global total 
@@ -16,18 +19,14 @@ def backtrack(turn):
         total = max(total, calc())
         return
     
-    moved_any = False
-
     for i in range(K):
         if moves[i] >= M:
             continue
-        moved_any = True
-        moves[i] += orders[turn]
+        moves[i].append(orders[turn])
         backtrack(turn+1)
-        moves[i] -= orders[turn]
+        moves[i].pop()
     
-    if not moved_any:
-        backtrack(turn + 1)
+    backtrack(turn+1)
 
 backtrack(0)
 print(total)
