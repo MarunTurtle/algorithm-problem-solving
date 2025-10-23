@@ -8,7 +8,7 @@ for ch in expression:
         alphabets.append(ch)
 
 n = len(alphabets)
-ans = float('-inf')
+ans = 0
 path = []
 
 def calculate(numbers):
