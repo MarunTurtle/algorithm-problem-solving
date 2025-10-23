@@ -10,7 +10,7 @@ def pos(i):
     return sum(moves[i])
 
 def calc():
-    return sum(1 if pos(i) >= M for i in range(K))
+    return sum(1 for i in range(K) if pos(i) >= M )
 
 def backtrack(turn):
     global total 
