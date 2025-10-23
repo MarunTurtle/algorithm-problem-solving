@@ -1,33 +1,37 @@
-expression = input()
+import sys
+
+INT_MIN = -sys.maxsize
+
 n = 6
-path = [0 for _ in range(n)]
-ans = float('-inf')
+expression = input()
+num = [0 for _ in range(n)]
+ans = INT_MIN
 
-def conv(alpha):
-    return path[ord(expression[i]) - ord('a')] 
+def conv(idx):
+    return num[ord(expression[idx]) - ord('a')]
 
-def calculate():
+def calc():
     length = len(expression)
-    total = conv(0)
+    value = conv(0)
     for i in range(2, length, 2):
-        if expression[i-1] == '+':
-            total += conv(i)
-        elif expression[i-1] == '-':
-            total -= conv(i)
+        if expression[i - 1] == '+':
+            value += conv(i)
+        elif expression[i - 1] == '-':
+            value -= conv(i)
         else:
-            total += conv(i)
-    return total
+            value *= conv(i)
+    return value
 
-def backtrack(depth):
+def find_max(cnt):
     global ans
-
-    if depth == n:
-        ans = max(ans, calculate())
+    
+    if cnt == n:
+        ans = max(ans, calc())
         return
     
     for i in range(1, 5):
-        path[depth] = i
-        backtrack(depth + 1)
+        num[cnt] = i
+        find_max(cnt + 1)
 
-backtrack(0)
+find_max(0)
 print(ans)
