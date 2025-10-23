@@ -15,15 +15,19 @@ def backtrack(turn):
     if turn == N:
         total = max(total, calc())
         return
-        
+    
+    moved_any = False
+
     for i in range(K):
         if moves[i] >= M:
             continue
+        moved_any = True
         moves[i] += orders[turn]
         backtrack(turn+1)
         moves[i] -= orders[turn]
-    backtrack(turn + 1)
-
+    
+    if not moved_any:
+        backtrack(turn + 1)
 
 backtrack(0)
 print(total)
