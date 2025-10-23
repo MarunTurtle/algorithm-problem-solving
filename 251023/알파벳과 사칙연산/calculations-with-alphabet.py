@@ -8,19 +8,18 @@ for ch in expression:
         alphabets.append(ch)
 
 n = len(alphabets)
-ans = 0
+ans = float('-inf')
 path = []
 
 def calculate(numbers):
     total_ans = numbers[0]
     for i in range(1, len(numbers)):
         if operators[i-1] == '-':
-            total_ans = total_ans - numbers[i]
+            total_ans -= numbers[i]
         elif operators[i-1] == '*':
-            total_ans = total_ans * numbers[i]
+            total_ans *= numbers[i]
         else:
-            total_ans = total_ans + numbers[i]
-
+            total_ans += numbers[i]
     return total_ans
 
 def backtrack(depth):
@@ -29,11 +28,11 @@ def backtrack(depth):
     if depth == n:
         ans = max(ans, calculate(path))
         return
-
+    
     for i in range(1, 5):
         path.append(i)
         backtrack(depth + 1)
-        path.pop()
-
+        path.pop()      
+    
 backtrack(0)
 print(ans)
