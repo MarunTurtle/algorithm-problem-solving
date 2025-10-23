@@ -7,12 +7,15 @@ for ch in expression:
     else :
         alphabets.append(ch)
 
-n = len(alphabets)
+variants = sorted(set(alphabets))
+n = len(variants)
 ans = float('-inf')
-path = []
+assign = {}
 
-def calculate(numbers):
-    total_ans = numbers[0]
+def calculate(assign_map):
+    numbers = [assign_map[ch] for ch in alphabets]
+
+    total_ans = numbers[0] 
     for i in range(1, len(numbers)):
         if operators[i-1] == '-':
             total_ans -= numbers[i]
@@ -26,13 +29,13 @@ def backtrack(depth):
     global ans
 
     if depth == n:
-        ans = max(ans, calculate(path))
+        ans = max(ans, calculate(assign))
         return
     
     for i in range(1, 5):
-        path.append(i)
+        assign[variants[depth]] = i
         backtrack(depth + 1)
-        path.pop()      
-    
+        assign.pop(variants[depth])
+
 backtrack(0)
 print(ans)
