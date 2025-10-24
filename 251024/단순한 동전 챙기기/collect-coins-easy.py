@@ -37,7 +37,7 @@ def get_min_route(idx, dist, coin_cnt, last_coin_pos):
         tmp = dist + get_dist(last_coin_pos, end)
         if ans > tmp:
             ans = tmp
-            print(path, ans)
+            # print(path, ans)
 
     if idx >= len(coins) or coin_cnt + (len(coins) - idx) < 3:
         return
