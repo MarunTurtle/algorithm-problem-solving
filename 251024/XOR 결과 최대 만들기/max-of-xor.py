@@ -10,6 +10,9 @@ def get_max_num(cur_idx, cnt, value):
         ans = max(ans, value)
         return
 
+    if cur_idx >= n or n - cur_idx < m - cnt:
+        return
+
     get_max_num(cur_idx + 1, cnt + 1, value ^ A[cur_idx])
     get_max_num(cur_idx + 1, cnt, value)
 
