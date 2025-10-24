@@ -28,19 +28,27 @@ def get_dist(pos1, pos2):
     r2, c2 = pos2
     return abs(r1 - r2) + abs(c1 - c2)
 
+path = []
+
 def get_min_route(idx, dist, coin_cnt, last_coin_pos):
     global ans
     
     if coin_cnt == 3:
         tmp = dist + get_dist(last_coin_pos, end)
-        ans = min(ans, tmp)
-    
+        if ans > tmp:
+            ans = tmp
+            print(path)
+
     if idx >= len(coins) or coin_cnt + (len(coins) - idx) < 3:
         return
     
     dist += get_dist(last_coin_pos, coins[idx][1])
+    path.append(coins[idx][0])
+    
     get_min_route(idx + 1, dist, coin_cnt + 1, coins[idx][1])
+    
     dist -= get_dist(last_coin_pos, coins[idx][1])
+    path.pop()
 
     get_min_route(idx + 1, dist, coin_cnt, coins[idx][1])
     
@@ -48,7 +56,5 @@ if len(coins) < 3:
     ans = -1
 else:
     get_min_route(0, 0, 0, start)
-    if ans == INT_MAX:
-        ans = -1
 
 print(ans)
