@@ -6,8 +6,11 @@ comb = []
 def get_combination(depth, start):
     if depth == m:
         print(*comb)
+        return
     
-    for v in range(start+1, n+1):
+    limit = n - (m - depth) + 1
+
+    for v in range(start+1, limit+1):
         comb.append(v)
         get_combination(depth+1, v)
         comb.pop()
