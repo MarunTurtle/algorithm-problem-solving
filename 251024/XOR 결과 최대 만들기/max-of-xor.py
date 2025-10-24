@@ -2,28 +2,16 @@ n, m = map(int, input().split())
 A = list(map(int, input().split()))
 
 ans = 0
-path = []
 
-def get_xor(path):
-    res = path[0]
-    for i in range(1, len(path)):
-        res ^= path[i]
-    return res
-
-
-def get_max_num(cur_num, cnt):
+def get_max_num(cur_idx, cnt, value):
     global ans
-    if cur_num == n:
-        if cnt == m:
-            value = get_xor(path)
-            ans = max(ans, value)
+
+    if cnt == m:
+        ans = max(ans, value)
         return
-    
-    path.append(A[cur_num])
-    get_max_num(cur_num + 1, cnt + 1)
-    path.pop()
 
-    get_max_num(cur_num + 1, cnt)
+    get_max_num(cur_idx + 1, cnt + 1, value ^ A[cur_idx])
+    get_max_num(cur_idx + 1, cnt, value)
 
-get_max_num(0, 0)
+get_max_num(0, 0, 0)
 print(ans)
