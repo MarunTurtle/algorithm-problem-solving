@@ -20,15 +20,10 @@ for i in range(n):
 
 coins.sort(key = lambda x : x[0])
 
-dr = [-1, 1, 0, 0]
-dc = [0, 0, -1, 1]
-
 def get_dist(pos1, pos2):
     r1, c1 = pos1
     r2, c2 = pos2
     return abs(r1 - r2) + abs(c1 - c2)
-
-path = []
 
 def get_min_route(idx, dist, coin_cnt, last_coin_pos):
     global ans
@@ -37,19 +32,15 @@ def get_min_route(idx, dist, coin_cnt, last_coin_pos):
         tmp = dist + get_dist(last_coin_pos, end)
         if ans > tmp:
             ans = tmp
-            # print(path, ans)
+        return
 
     if idx >= len(coins) or coin_cnt + (len(coins) - idx) < 3:
         return
     
-    dist += get_dist(last_coin_pos, coins[idx][1])
-    path.append(coins[idx][0])
-    
+    dist += get_dist(last_coin_pos, coins[idx][1])  
     get_min_route(idx + 1, dist, coin_cnt + 1, coins[idx][1])
     
     dist -= get_dist(last_coin_pos, coins[idx][1])
-    path.pop()
-
     get_min_route(idx + 1, dist, coin_cnt, last_coin_pos)
     
 if len(coins) < 3:
