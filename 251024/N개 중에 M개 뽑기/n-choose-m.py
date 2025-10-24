@@ -1,18 +1,18 @@
-# n이하 숫자, M개 선택
-n, m = map(int, input().split())
+# 변수 선언 및 입력
 
-comb = []
+n, m = tuple(map(int, input().split()))
+combination = []
 
-def get_combination(depth, start):
-    if depth == m:
-        print(*comb)
+def find_combination(curr_num, cnt):
+    if curr_num == n + 1:
+        if cnt == m:
+            print(*combination)
         return
-    
-    limit = n - (m - depth) + 1
 
-    for v in range(start+1, limit+1):
-        comb.append(v)
-        get_combination(depth+1, v)
-        comb.pop()
+    combination.append(curr_num)
+    find_combination(curr_num + 1, cnt + 1)
+    combination.pop()
 
-get_combination(0, 0)
+    find_combination(curr_num + 1, cnt)
+
+find_combination(1, 0)
