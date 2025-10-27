@@ -15,7 +15,10 @@ def get_min_sum_combo(depth):
         return
     
     for i in range(n):
-        if not visited[i] and depth != i and grid[depth][i] != 0:
+        if not visited[i] and depth != i:
+            if grid[depth][i] == 0:
+                visited[i] = True
+                continue              
             selected.append(grid[depth][i])
             visited[i] = True
             get_min_sum_combo(depth + 1)
