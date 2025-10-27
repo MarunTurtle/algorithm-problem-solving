@@ -6,22 +6,24 @@ ans = float('inf')
 picked = []
 visited = [0] * (n)
 
-def get_min_path(depth):
+def get_min_path(depth, start):
     global ans
-
-    if depth == n: 
-        ans = min(ans, sum(picked))
+    if depth == n:
+        if start == 0:     
+            ans = min(ans, sum(picked))
+            # if ans == sum(picked):
+            #     print(picked)
         return
 
-    for row in range(n):
-        if grid[row][depth] == 0:
+    for col in range(n):
+        if grid[start][col] == 0:
             continue
-        if not visited[row]:
-            picked.append(grid[row][depth])
-            visited[row] = True
-            get_min_path(depth + 1)
-            visited[row] = False
+        if not visited[col]:
+            picked.append(grid[start][col])
+            visited[col] = True
+            get_min_path(depth + 1, col)
+            visited[col] = False
             picked.pop()
 
-get_min_path(0)
+get_min_path(0, 0)
 print(ans)
