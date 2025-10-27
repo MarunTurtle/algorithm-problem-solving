@@ -11,7 +11,6 @@ def get_min_path(depth):
 
     if depth == n: 
         ans = min(ans, sum(picked))
-        print(picked)
         return
 
     for row in range(n):
