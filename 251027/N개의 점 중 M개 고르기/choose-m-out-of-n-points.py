@@ -50,4 +50,4 @@ def get_min_diff_btw_furthest(depth, cur_idx):
     get_min_diff_btw_furthest(depth, cur_idx + 1)
 
 get_min_diff_btw_furthest(0, 0)
-print(int(ans**2))
+print(round(ans**2))
