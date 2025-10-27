@@ -3,27 +3,25 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 
 # Please write your code here.
 ans = float('inf')
-picked = []
 visited = [0] * (n)
+visited[0] = True
 
-def get_min_path(depth, start):
+def get_min_path(depth, cur, cost):
     global ans
-    if depth == n:
-        if start == 0:     
-            ans = min(ans, sum(picked))
-            # if ans == sum(picked):
-            #     print(picked)
+    
+    if cost >= ans:
         return
 
-    for col in range(n):
-        if grid[start][col] == 0:
-            continue
-        if not visited[col]:
-            picked.append(grid[start][col])
-            visited[col] = True
-            get_min_path(depth + 1, col)
-            visited[col] = False
-            picked.pop()
+    if depth == n - 1:
+        if grid[cur][0] > 0:
+            ans = min(ans, cost + grid[cur][0])
+        return
 
-get_min_path(0, 0)
+    for nxt in range(1, n):
+        if not visited[nxt] and grid[cur][nxt] > 0 and nxt != cur:
+            visited[nxt] = True
+            get_min_path(depth + 1, nxt, cost + grid[cur][nxt])
+            visited[nxt] = False
+
+get_min_path(0, 0, 0)
 print(ans)
