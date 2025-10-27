@@ -1,4 +1,4 @@
-import sys, math
+import sys
 INT_MAX = sys.maxsize
 
 n, m = map(int, input().split())
@@ -11,7 +11,7 @@ def get_uklid(pairs):
     r, c = pairs[0]
     nr, nc = pairs[1]
 
-    return math.sqrt((r - nr)**2 + (c - nc)**2)
+    return (r - nr)**2 + (c - nc)**2
 
 def calc(selected):
     max_ans = 0
@@ -50,4 +50,4 @@ def get_min_diff_btw_furthest(depth, cur_idx):
     get_min_diff_btw_furthest(depth, cur_idx + 1)
 
 get_min_diff_btw_furthest(0, 0)
-print(round(ans**2))
+print(ans)
