@@ -15,23 +15,10 @@ def get_uklid(pairs):
 
 def calc(selected):
     max_ans = 0
-    pair = []
+    for i in range(m):
+        for j in range(i + 1, m):
+            max_ans = max(max_ans, get_uklid([selected[i], selected[j]]))
 
-    def get_pair_distance(depth, cur_idx):
-        nonlocal max_ans
-        if depth == 2:
-            pos_ans = get_uklid(pair)
-            max_ans = max(max_ans, pos_ans)
-            return
-        if cur_idx == m:
-            return
-
-        pair.append(selected[cur_idx])
-        get_pair_distance(depth + 1, cur_idx + 1)
-        pair.pop()
-        get_pair_distance(depth, cur_idx + 1)
-    
-    get_pair_distance(0, 0)
     return max_ans
 
 def get_min_diff_btw_furthest(depth, cur_idx):
