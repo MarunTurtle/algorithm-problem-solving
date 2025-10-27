@@ -11,7 +11,9 @@ def get_sum():
 def get_min_sum_combo(depth):
     global ans
     if depth == n:
-        ans = min(ans, get_sum())
+        if len(selected) == n:
+            ans = min(ans, get_sum())
+            return
         return
     
     for i in range(n):
