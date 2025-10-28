@@ -1,7 +1,5 @@
-import sys
-
-n, m = map(int, sys.stdin.readline().split())
-grid = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
+n, m = map(int, input().split())
+grid = [list(map(int, input().split())) for _ in range(n)]
 
 K = 0
 for row in grid:
