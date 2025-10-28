@@ -2,7 +2,7 @@ n, m = map(int, input().split())
 grid = [list(map(int, input().split())) for _ in range(n)]
 K = 0
 max_safe_area = 0
-max_k = 0
+max_k = 1
 
 for row in grid:
     K = max(K, max(row))
