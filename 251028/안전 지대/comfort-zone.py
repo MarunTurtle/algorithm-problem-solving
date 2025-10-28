@@ -20,7 +20,6 @@ def dfs(r, c, k):
         nr = r + dr[i]
         nc = c + dc[i]
         if is_safe(nr, nc, k) and not visited[nr][nc]:
-            visited[nr][nc] = True
             dfs(nr, nc, k)
 
 for k in range(1, K+1):
