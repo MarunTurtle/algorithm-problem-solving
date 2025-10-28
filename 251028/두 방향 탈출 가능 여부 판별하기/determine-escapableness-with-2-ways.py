@@ -4,17 +4,15 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 end = (n-1, m-1)
 dr = [1, 0]
 dc = [0, 1]
-path = []
 
 def in_range(r, c):
-    return 0 <= r < n and 0 <= c < n
+    return 0 <= r < n and 0 <= c < m
 
 def can_go(r, c):
     return in_range(r, c) and grid[r][c] == 1
 
 def dfs(r, c):
     grid[r][c] = 2
-    path.append((r, c))
     
     for i in range(2):
         nr = r + dr[i]
@@ -23,4 +21,4 @@ def dfs(r, c):
             dfs(nr, nc)
 
 dfs(0, 0)
-print(1 if end in path else 0 )
+print(1 if grid[n-1][m-1] == 2 else 0 )
