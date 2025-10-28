@@ -15,8 +15,6 @@ def can_go(r, c):
 def dfs(r, c):
     grid[r][c] = 2
     path.append((r, c))
-    if (r, c) == end:
-        return
     
     for i in range(2):
         nr = r + dr[i]
