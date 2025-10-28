@@ -26,7 +26,7 @@ def flood_fill(sr, sc, k):
                 stack.append((nr, nc))
 
 max_safe_area = 0
-argmax_k = 0 
+argmax_k = 1
 
 for k in range(1, K):
     visited = [[False]*m for _ in range(n)]
