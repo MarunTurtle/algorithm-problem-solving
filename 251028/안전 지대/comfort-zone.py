@@ -23,7 +23,7 @@ def dfs(r, c, k):
             visited[nr][nc] = True
             dfs(nr, nc, k)
 
-for k in range(1, K):
+for k in range(1, K+1):
     count = 0
     visited = [[False for _ in range(m)] for _ in range(n)]
     for r in range(n):
