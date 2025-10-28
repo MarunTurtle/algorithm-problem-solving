@@ -1,41 +1,43 @@
 import sys
-sys.setrecursionlimit(2500)
+from collections import deque
 
-n, m = map(int, input().split())
-grid = [list(map(int, input().split())) for _ in range(n)]
+n, m = map(int, sys.stdin.readline().split())
+grid = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
+
 K = 0
-max_safe_area = 0
-max_k = 1
-
 for row in grid:
     K = max(K, max(row))
+
+dr = (1, 0, -1, 0)
+dc = (0, 1, 0, -1)
 
 def is_safe(r, c, k):
     return 0 <= r < n and 0 <= c < m and grid[r][c] > k
 
-def dfs(r, c, k):
-    dr = [1, 0, -1, 0]
-    dc = [0, 1, 0, -1]
-    
-    visited[r][c] = True
-        
-    for i in range(4):
-        nr = r + dr[i]
-        nc = c + dc[i]
-        if is_safe(nr, nc, k) and not visited[nr][nc]:
-            dfs(nr, nc, k)
+def flood_fill(sr, sc, k):
+    stack = [(sr, sc)]
+    visited[sr][sc] = True
+    while stack:
+        r, c = stack.pop()
+        for i in range(4):
+            nr, nc = r + dr[i], c + dc[i]
+            if is_safe(nr, nc, k) and not visited[nr][nc]:
+                visited[nr][nc] = True
+                stack.append((nr, nc))
 
-for k in range(1, K+1):
+max_safe_area = 0
+argmax_k = 0 
+
+for k in range(1, K):
+    visited = [[False]*m for _ in range(n)]
     count = 0
-    visited = [[False for _ in range(m)] for _ in range(n)]
     for r in range(n):
         for c in range(m):
             if is_safe(r, c, k) and not visited[r][c]:
-                dfs(r, c, k)
+                flood_fill(r, c, k)
                 count += 1
-
     if count > max_safe_area:
         max_safe_area = count
-        max_k = k
+        argmax_k = k
 
-print(max_k, max_safe_area)
+print(argmax_k, max_safe_area)
