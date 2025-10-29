@@ -17,17 +17,18 @@ def can_go(r, c):
 def bfs():
     while q:
         r, c = q.pop()
-        visited[r][c] = 1
         for sr, sc in zip(dr, dc):
             nr = r + sr
             nc = c + sc
             if can_go(nr,  nc):
+                visited[nr][nc] = 1
                 q.appendleft((nr, nc))
 
 for coord in points:
     r, c = coord
     r -= 1
     c -= 1
+    visited[r][c] = 1
     q = deque()
     q.append((r, c))
     bfs()
