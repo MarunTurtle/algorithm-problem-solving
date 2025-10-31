@@ -12,7 +12,7 @@ def in_range(r, c):
 def can_go(r, c):
     return in_range(r, c) and not visited[r][c]
 
-def dfs(start_pos):
+def bfs(start_pos):
     global bomb_count
     q = deque()
     r, c = start_pos[0] - 1, start_pos[1] - 1
@@ -37,6 +37,6 @@ def dfs(start_pos):
                         continue
 
 for start_pos in starts:  
-    dfs(start_pos)
+    bfs(start_pos)
 
 print(sum(1 for i in range(n) for j in range(n) if visited[i][j] == 1))
