@@ -1,42 +1,60 @@
 from collections import deque
+from itertools import combinations
+import sys
 
-n, k, bomb_count = map(int, input().split())
+input = sys.stdin.readline
+
+n, k, b = map(int, input().split())
 grid = [list(map(int, input().split())) for _ in range(n)]
 starts = [tuple(map(int, input().split())) for _ in range(k)]
-visited = [[0] * n for _ in range(n)]
-drs, dcs = [0, 0, -1, 1], [-1, 1, 0, 0]
+
+drs = [0, 0, -1, 1]
+dcs = [-1, 1, 0, 0]
 
 def in_range(r, c):
     return 0 <= r < n and 0 <= c < n
 
-def can_go(r, c):
-    return in_range(r, c) and not visited[r][c]
-
-def bfs(start_pos):
-    global bomb_count
+def bfs(board):
+    """모든 시작점을 동시에 넣고 멀티소스 BFS로 방문 가능한 칸 수 계산"""
     q = deque()
-    r, c = start_pos[0] - 1, start_pos[1] - 1
-    q.append((r, c))
-    visited[r][c] = 1
-
+    visited = [[0]*n for _ in range(n)]
+    for sr, sc in starts:
+        r, c = sr-1, sc-1
+        if not in_range(r, c): 
+            continue
+        if board[r][c] == 1:   # 시작점이 돌이면 진행 불가
+            continue
+        if not visited[r][c]:
+            visited[r][c] = 1
+            q.append((r, c))
+    cnt = 0
     while q:
-        cr, cc = q.popleft()
+        r, c = q.popleft()
+        cnt += 1
         for dr, dc in zip(drs, dcs):
-            nr, nc = cr + dr, cc + dc
-            if can_go(nr, nc):
-                if grid[nr][nc] == 0:
-                    visited[nr][nc] = 1
-                    q.append((nr, nc))
-                else:
-                    if bomb_count > 0:
-                        bomb_count -= 1
-                        visited[nr][nc] = 1
-                        grid[nr][nc] = 0
-                        q.append((nr, nc))
-                    else:
-                        continue
+            nr, nc = r + dr, c + dc
+            if in_range(nr, nc) and not visited[nr][nc] and board[nr][nc] == 0:
+                visited[nr][nc] = 1
+                q.append((nr, nc))
+    return cnt
 
-for start_pos in starts:  
-    bfs(start_pos)
+# 돌 좌표 목록 수집
+rocks = [(r, c) for r in range(n) for c in range(n) if grid[r][c] == 1]
+t = min(b, len(rocks))
 
-print(sum(1 for i in range(n) for j in range(n) if visited[i][j] == 1))
+# 예외: 치울 돌이 없거나 b==0이면 바로 BFS
+if t == 0:
+    print(bfs(grid))
+    sys.exit(0)
+
+ans = 0
+
+# 조합으로 t개의 돌을 선택해 제거 → BFS → 최댓값
+for pick in combinations(rocks, t):
+    # 보드 복사 후 선택한 돌 제거
+    board = [row[:] for row in grid]
+    for (r, c) in pick:
+        board[r][c] = 0
+    ans = max(ans, bfs(board))
+
+print(ans)
