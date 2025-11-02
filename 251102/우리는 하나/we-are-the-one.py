@@ -1,73 +1,75 @@
 from collections import deque
 
-# N 크기의 나라
-# K 개의 도시 선택
-# low <= grid[r][c] <= high
-n, k, low, high = map(int, input().split())
-grid = [list(map(int, input().split())) for _ in range(n)]
+# 변수 선언 및 입력
+n, k, u, d = tuple(map(int, input().split()))
+a = [list(map(int, input().split())) for _ in range(n)]
 
-visited = [[0] * n for _ in range(n)]
-
-selected_cities = []
 ans = 0
 
-def in_range(r, c):
-    return 0 <= r < n and 0 <= c < n
+s_pos = []
+pos = [(i, j) for i in range(n) for j in range(n)]
 
-def can_go(nr, nc, cr, cc):
-    return in_range(nr, nc) and low <= abs(grid[cr][cc] - grid[nr][nc]) <= high and not seen[nr][nc]
+# bfs에 필요한 변수들 입니다.
+q = deque()
+visited = [[False for _ in range(n)] for _ in range(n)]
+
+def in_range(x, y):
+    return 0 <= x and x < n and 0 <= y and y < n
+
+def can_go(x, y, target):
+    if not in_range(x, y) or visited[x][y]:
+        return False
     
-seen = [[0] * n for _ in range(n)]
+    diff = abs(target - a[x][y])
+    return u <= diff and diff <= d
 
-def bfs(selected_cities):
-    q = deque()
-    drs, dcs = [0, 0, -1, 1], [-1, 1, 0, 0]
-    
-    for city in selected_cities:
-        cr, cc = city
-        q.append(city)
-        seen[cr][cc] = 1
-
+def bfs():
     while q:
-        cr, cc = q.popleft()    
-        for dr, dc in zip(drs, dcs):
-            nr = cr + dr
-            nc = cc + dc
-            if can_go(nr, nc, cr, cc):
-                q.append((nr, nc))
-                seen[nr][nc] = 1
+        x, y = q.popleft()        
+        dxs, dys = [1, -1, 0, 0], [0, 0, 1, -1]
+        for dx, dy in zip(dxs, dys):
+            nx, ny = x + dx, y + dy
+            if can_go(nx, ny, a[x][y]):
+                q.append((nx, ny))
+                visited[nx][ny] = True
+                
+def calc():
+    for i in range(n):
+        for j in range(n):
+            visited[i][j] = 0
 
-    return sum(1 for i in range(n) for j in range(n) if seen[i][j] == 1)
+    for x, y in s_pos:
+        q.append((x, y))
+        visited[x][y] = True
+        
+    bfs()
+    
+    cnt = 0
+    for i in range(n):
+        for j in range(n):
+            if visited[i][j]:
+                cnt += 1
+                
+    return cnt
 
-def get_city_combo(selected_num_city, r, c):
-    global visited, ans, seen
 
-    if selected_num_city == k:
-        seen = [[0] * n for _ in range(n)]
-        pos_ans = 0
-        pos_ans = bfs(selected_cities)
-        ans = max(ans, pos_ans)
+def find_max(idx, cnt):
+    global ans
+    
+    if cnt > k:
         return
-
-    # 범위 벗어나면 종료
-    if r == n:
+    
+    if idx == n * n:
+        if cnt == k:
+            ans = max(ans, calc())
         return
+    
+    s_pos.append(pos[idx])
+    find_max(idx + 1, cnt + 1)
+    s_pos.pop()
+    
+    find_max(idx + 1, cnt)
 
-    # 다음 좌표 계산 (오른쪽 → 아래로)
-    next_r, next_c = (r, c + 1) if c + 1 < n else (r + 1, 0)
 
-    # 현재 칸 선택하는 경우
-    if not visited[r][c]:
-        visited[r][c] = 1
-        selected_cities.append((r, c))
-
-        get_city_combo(selected_num_city + 1, next_r, next_c)
-
-        selected_cities.pop()
-        visited[r][c] = 0
-
-    # 현재 칸을 선택하지 않는 경우
-    get_city_combo(selected_num_city, next_r, next_c)
-
-get_city_combo(0, 0, 0)
+find_max(0, 0)
 print(ans)
