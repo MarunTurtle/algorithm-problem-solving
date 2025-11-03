@@ -24,8 +24,6 @@ def can_go(r, c, visited):
     return in_range(r, c) and not visited[r][c] and grid[r][c] != 1
 
 def bfs(human):
-
-    paths = [[0] * n for _ in range(n)]
     visited = [[0] * n for _ in range(n)]
     q = deque([human])
 
@@ -35,8 +33,7 @@ def bfs(human):
         for dr, dc in zip(drs, dcs):
             nr, nc = r + dr, c + dc
             if can_go(nr, nc, visited):
-                visited[nr][nc] = 1
-                paths[nr][nc] = paths[r][c] + 1
+                visited[nr][nc] = visited[r][c] + 1
                 q.append((nr, nc))
                 if grid[nr][nc] == 3:
                     break
@@ -45,8 +42,8 @@ def bfs(human):
 
     for shelter in shelters:
         sr, sc = shelter
-        if paths[sr][sc]:
-            min_value = min(min_value, paths[sr][sc])
+        if visited[sr][sc]:
+            min_value = min(min_value, visited[sr][sc])
     
     if min_value == float('inf'):
         min_value = - 1
