@@ -7,7 +7,7 @@ score = [[0] * m for _ in range(n)]
 
 # Please write your code here.
 def in_range(r, c):
-    return 0 <= r < n and 0 <= c < n
+    return 0 <= r < n and 0 <= c < m
 
 def can_go(r, c):
     return in_range(r, c) and grid[r][c] and not visited[r][c]
