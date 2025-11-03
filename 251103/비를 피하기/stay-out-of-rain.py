@@ -38,6 +38,8 @@ def bfs(human):
                 visited[nr][nc] = 1
                 paths[nr][nc] = paths[r][c] + 1
                 q.append((nr, nc))
+                if grid[nr][nc] == 3:
+                    break
 
     min_value = float('inf')
 
