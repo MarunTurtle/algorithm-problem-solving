@@ -31,4 +31,4 @@ def bfs():
 push(0, 0, 0)
 bfs()
 
-print(score[n-1][m-1])
+print(score[n-1][m-1] if score[n-1][m-1] else -1)
