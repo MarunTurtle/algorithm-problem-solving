@@ -1,39 +1,50 @@
 from collections import deque
 import sys
+
 input = sys.stdin.readline
+n, m, k = map(int, input().split())
+candies = list(map(int, input().split()))
 
-n, m, K = map(int, input().split())
-candies = [0] + list(map(int, input().split()))
-
-g = [[] for _ in range(n + 1)]
+g = [[] for _ in range(n)]
 for _ in range(m):
-    a, b = map(int, input().split())
-    g[a].append(b)
-    g[b].append(a)
+    x, y = map(int, input().split())
+    x -= 1; y -= 1
+    g[x].append(y)
+    g[y].append(x)
 
-visited = [False] * (n + 1)
+# 1) BFS로 연결 컴포넌트 묶기 -> (그룹인원, 그룹사탕합) 리스트 생성
+visited = [0] * n
 groups = []
 
-for s in range(1, n + 1):
+for s in range(n):
     if visited[s]:
         continue
     q = deque([s])
-    visited[s] = True
+    visited[s] = 1
     cnt = 0
-    tot = 0
+    total = 0
+
     while q:
         cur = q.popleft()
         cnt += 1
-        tot += candies[cur]
+        total += candies[cur]
         for nx in g[cur]:
             if not visited[nx]:
-                visited[nx] = True
+                visited[nx] = 1
                 q.append(nx)
-    if cnt < K:
-        groups.append((cnt, tot))
 
-dp = [0] * K
-for size, val in groups:
-    dp[size:K] = [max(a, b + val) for a, b in zip(dp[size:K], dp[:K - size])]
+    groups.append((cnt, total))  # (인원, 사탕합)
 
-print(dp[K - 1])
+groups.sort(key=lambda x: (-x[1], x[0]))
+
+cap = k - 1
+if cap <= 0:
+    print(0)
+    sys.exit(0)
+
+dp = [0] * (cap + 1)
+for cnt, total in groups:
+    for w in range(cap, cnt - 1, -1):
+        dp[w] = max(dp[w], dp[w - cnt] + total)
+
+print(max(dp))
