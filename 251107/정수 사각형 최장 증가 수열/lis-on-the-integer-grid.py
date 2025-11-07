@@ -1,47 +1,34 @@
-from collections import deque
+import sys
+sys.setrecursionlimit(10**7)
+from collections import deque  # 없어도 되지만 원래 코드 호환 위해 둠
 
 n = int(input())
 grid = [list(map(int, input().split())) for _ in range(n)]
 
-# Please write your code here.
+# 증가하는 방향으로만 이동 → DAG → 메모이제이션으로 최장 증가 경로
 drs = [0, 0, -1, 1]
 dcs = [-1, 1, 0, 0]
 
-visited = [[0] * n for _ in range(n)]
-dp = [[0] * n for _ in range(n)]
-q = deque()
+dp = [[0] * n for _ in range(n)]  # dp[r][c] = (r,c)에서 시작하는 최장 길이
 
 def in_range(r, c):
     return 0 <= r < n and 0 <= c < n
 
-def can_go(nr, nc, r, c):
-    return in_range(nr, nc) and not visited[nr][nc] and grid[r][c] < grid[nr][nc]
-
-def initialize(sr, sc):
-    for r in range(n):
-        for c in range(n):
-            visited[r][c] = 0
-            dp[r][c] = 0
-    visited[sr][sc] = 1
-    dp[sr][sc] = 1
-    q.append((sr, sc))
+def dfs(r, c):
+    if dp[r][c]:                # 이미 계산됨
+        return dp[r][c]
+    best = 1                    # 자기 자신만 포함하는 길이
+    cur = grid[r][c]
+    for dr, dc in zip(drs, dcs):
+        nr, nc = r + dr, c + dc
+        if in_range(nr, nc) and grid[nr][nc] > cur:
+            best = max(best, 1 + dfs(nr, nc))
+    dp[r][c] = best
+    return best
 
 ans = 0
-
-for sr in range(n):
-    for sc in range(n):
-        initialize(sr, sc)
-        while q:
-            r, c = q.popleft()
-            for dr, dc in zip(drs, dcs):
-                nr, nc = r + dr, c + dc
-                if can_go(nr, nc, r, c):
-                    visited[nr][nc] = 1
-                    dp[nr][nc] = dp[r][c] + 1
-                    q.append((nr, nc)) 
-        max_value = max(map(max, dp))
-        ans = max(ans, max_value)
+for r in range(n):
+    for c in range(n):
+        ans = max(ans, dfs(r, c))
 
 print(ans)
-        
-
