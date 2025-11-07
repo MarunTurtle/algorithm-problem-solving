@@ -2,26 +2,22 @@ n = int(input())
 grid = [list(map(int, input().split())) for _ in range(n)]
 dp = [[1] * n for _ in range(n)]
 
+def in_range(r, c):
+    return 0 <= r < n and 0 <= c < n
+
 cells = []
-ans = 0
-
-def in_range(x, y):
-    return 0 <= x < n and 0 <= y < n
-
 for i in range(n):
     for j in range(n):
         cells.append((grid[i][j], i, j))
 
 cells.sort()
 
-for base, x, y in cells:
-    dxs, dys = [-1, 1, 0, 0], [0, 0, -1, 1]
+drs, dcs = [0, 0, -1, 1], [-1, 1, 0, 0]
 
-    for dx, dy in zip(dxs, dys):
-        nx, ny = x + dx, y + dy
-        if in_range(nx, ny) and grid[nx][ny] > base:
-            dp[nx][ny] = max(dp[nx][ny], dp[x][y] + 1)
+for value, r, c in cells:
+    for dr, dc in zip(drs, dcs):
+        nr, nc = r + dr, c + dc
+        if in_range(nr, nc) and grid[nr][nc] > value:
+            dp[nr][nc] = max(dp[nr][nc], dp[r][c] + 1)
 
-ans = max(map(max, dp))
-
-print(ans)
+print(max(map(max, dp)))
