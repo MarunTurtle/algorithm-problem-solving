@@ -17,9 +17,6 @@ for r in range(1, n):
     for c in range(1, n):
         top = value[r-1][c]
         left = value[r][c-1]
-        if top >= grid[r][c] or left >= grid[r][c]:
-            value[r][c] = grid[r][c]
-        else:
-            value[r][c] = max(top, left)
+        value[r][c] = min(max(top, left), grid[r][c])
 
 print(value[n-1][n-1])
