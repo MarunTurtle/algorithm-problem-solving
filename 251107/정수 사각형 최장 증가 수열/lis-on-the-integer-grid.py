@@ -22,8 +22,6 @@ for base, x, y in cells:
         if in_range(nx, ny) and grid[nx][ny] > base:
             dp[nx][ny] = max(dp[nx][ny], dp[x][y] + 1)
 
-for i in range(n):
-    for j in range(n):
-        ans = max(ans, dp[i][j])
+ans = max(map(max, dp))
 
 print(ans)
