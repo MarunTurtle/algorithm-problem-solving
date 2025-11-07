@@ -1,4 +1,3 @@
-# 변수 선언 및 입력:
 n = int(input())
 grid = [list(map(int, input().split())) for _ in range(n)]
 dp = [[0] * n for _ in range(n)]
@@ -12,8 +11,6 @@ def in_range(x, y):
 for i in range(n):
     for j in range(n):
         cells.append((grid[i][j], i, j))
-
-cells.sort()
 
 for i in range(n):
     for j in range(n):
