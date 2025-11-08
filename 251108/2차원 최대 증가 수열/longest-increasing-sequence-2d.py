@@ -15,9 +15,6 @@ def initialize():
 
 initialize()
 
-def can_go(r, c, nr, nc):
-    return r > nr and c > nc
-
 for r in range(1, n):
     for c in range(1, m):
         for nr in range(r):
@@ -25,8 +22,7 @@ for r in range(1, n):
                 if dp[nr][nc] == INT_MIN:
                     continue
 
-                if can_go(r, c, nr, nc):
-                    if grid[r][c] > grid[nr][nc]:
-                        dp[r][c] = max(dp[r][c], dp[nr][nc] + 1)
+                if grid[r][c] > grid[nr][nc]:
+                    dp[r][c] = max(dp[r][c], dp[nr][nc] + 1)
 
 print(max(map(max, dp)))
