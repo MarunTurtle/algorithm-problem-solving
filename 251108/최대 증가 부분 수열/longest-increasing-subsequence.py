@@ -3,12 +3,12 @@ arr = list(map(int, input().split()))
 
 def lower_bound(dp, target):
     l, r = 0, len(dp)
-    mid = (l + r) // 2
     while l < r:
+        mid = (l + r) // 2
         if dp[mid] < target:
             l = mid + 1
         else:
-            r = mid - 1
+            r = mid
     return l
 
 dp = []
