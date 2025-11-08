@@ -6,7 +6,7 @@ dp = [1] * n
 
 for i in range(n):
     for j in range(i):
-        if lines[j][1] < lines[i][1] and lines[j][0] < lines[i][0]:
+        if lines[j][1] < lines[i][0]:
             dp[i] = max(dp[i], dp[j] + 1)
 
 print(max(dp))
