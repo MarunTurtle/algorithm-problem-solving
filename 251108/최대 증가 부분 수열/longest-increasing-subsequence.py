@@ -1,12 +1,25 @@
+def lower_bound(arr, target):
+    left, right = 0, len(arr)
+    while left < right:
+        mid = (left + right) // 2
+        if arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid
+    return left
+
+
 n = int(input())
+nums = list(map(int, input().split()))
 
-a = [0] + list(map(int, input().split()))
+dp = []
 
-dp = [0 for _ in range(n + 1)]
+for num in nums:
+    idx = lower_bound(dp, num)
+    # 삽입 위치가 dp 끝이라면 append
+    if idx == len(dp):
+        dp.append(num)
+    else:
+        dp[idx] = num
 
-for i in range(1, n + 1):
-    for j in range(i):
-        if a[j] < a[i]:
-            dp[i] = max(dp[i], dp[j] + 1)
-
-print(max(dp))
+print(len(dp))
