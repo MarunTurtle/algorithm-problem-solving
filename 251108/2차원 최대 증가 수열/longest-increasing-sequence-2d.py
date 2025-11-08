@@ -4,7 +4,6 @@ INT_MIN = -sys.maxsize
 n, m = map(int, input().split())
 grid = [list(map(int, input().split())) for _ in range(n)]
 
-# Please write your code here.
 dp = [[0] * m for _ in range(n)]
 
 def initialize():
@@ -20,15 +19,14 @@ def can_go(r, c, nr, nc):
     return r > nr and c > nc
 
 for r in range(1, n):
-    for c in range(1, n):
+    for c in range(1, m):
         for nr in range(r):
             for nc in range(c):                
                 if dp[nr][nc] == INT_MIN:
                     continue
-                    
+
                 if can_go(r, c, nr, nc):
                     if grid[r][c] > grid[nr][nc]:
                         dp[r][c] = max(dp[r][c], dp[nr][nc] + 1)
-
 
 print(max(map(max, dp)))
