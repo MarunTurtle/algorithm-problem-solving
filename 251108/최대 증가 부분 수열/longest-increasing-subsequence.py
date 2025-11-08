@@ -1,25 +1,25 @@
-def lower_bound(arr, target):
-    left, right = 0, len(arr)
-    while left < right:
-        mid = (left + right) // 2
-        if arr[mid] < target:
-            left = mid + 1
-        else:
-            right = mid
-    return left
-
-
 n = int(input())
-nums = list(map(int, input().split()))
+arr = list(map(int, input().split()))
+
+def lower_bound(dp, target):
+    l, r = 0, len(dp)
+    mid = (l + r) // 2
+    while l < r:
+        if dp[mid] < target:
+            l = mid + 1
+        else:
+            r = mid - 1
+    return l
 
 dp = []
 
-for num in nums:
-    idx = lower_bound(dp, num)
-    # 삽입 위치가 dp 끝이라면 append
+for i in range(n):
+    idx = lower_bound(dp, arr[i])
+
     if idx == len(dp):
-        dp.append(num)
+        dp.append(arr[i])
     else:
-        dp[idx] = num
+        dp[idx] = arr[i]
 
 print(len(dp))
+    
