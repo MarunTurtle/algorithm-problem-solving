@@ -25,7 +25,7 @@ for r in range(1, n):
             for nc in range(c):                
                 if dp[nr][nc] == INT_MIN:
                     continue
-                
+                    
                 if can_go(r, c, nr, nc):
                     if grid[r][c] > grid[nr][nc]:
                         dp[r][c] = max(dp[r][c], dp[nr][nc] + 1)
