@@ -11,4 +11,4 @@ for i in range(1, n+1):
                 continue
             dp[i] += dp[i - nums[j]]
 
-print(-1 if dp[-1] == 0 else dp[-1])
+print(-1 if dp[-1] == 0 else dp[-1] % 10007)
