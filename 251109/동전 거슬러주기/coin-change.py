@@ -11,4 +11,4 @@ for v in range(1, target + 1):
                 continue
             dp[v] = min(dp[v], dp[v - coins[j]] + 1)
 
-print(dp[-1])
+print(dp[-1] if dp[-1] != float('inf') else -1)
