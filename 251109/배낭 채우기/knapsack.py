@@ -13,4 +13,4 @@ for i in range(N):
                 continue
             dp[j] = max(dp[j], dp[j - w[i]] + v[i])
 
-print(-1 if dp[-1] == float('-inf') else dp[-1])
+print(max(dp))
