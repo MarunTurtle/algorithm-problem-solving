@@ -29,14 +29,14 @@ while True:
 
         def visit(r, c, dr, dc, visited):
             a = 0
-            marked = []
+            marked = 0
             nr, nc = r, c
             while True:
                 a += 1
                 nr, nc = r + (dr * a), c + (dc * a)
                 if can_go(nr, nc, visited):
                     visited[nr][nc] = 1
-                    marked.append((nr, nc))
+                    marked += 1
                 else:
                     return nr - dr, nc - dc, marked
 
@@ -54,11 +54,11 @@ while True:
                 end_r, end_c, marked = visit(r, c, dr, dc, visited)
                 if (end_r, end_c) == (r, c):
                     continue
-                dfs(end_r, end_c, steps + 1, visited, visited_cnt + len(marked))
+                dfs(end_r, end_c, steps + 1, visited, visited_cnt + marked)
 
-                for mr, mc in marked:
-                    visited[mr][mc] = 0
-
+                for i in range(0, marked):
+                    visited[end_r - (dr*i)][end_c - (dc*i)] = 0
+                    
         for sr, sc in starts:
             visited = [[0] * m for _ in range(n)]
             visited[sr][sc] = 1
