@@ -1,37 +1,19 @@
 n = int(input())
 coin = [0] + list(map(int, input().split()))
-dp = [float('-inf')] * (n+1)
-ones = [0] * (n+1)
+NEG = -10**18
+dp = [[NEG]*4 for _ in range(n+1)]
+dp[0][0] = 0
 
-cnt = 0
-dp[0] = 0
-dp[1] = coin[1]
-ones[1] = 1
-ans = 0
+for i in range(1, n+1):
+    for k in range(1, 4):
+        if dp[i-1][k-1] != NEG:
+            dp[i][k] = max(dp[i][k], dp[i-1][k-1] + coin[i])
+    if i >= 2:
+        for k in range(4):
+            if dp[i-2][k] != NEG:
+                dp[i][k] = max(dp[i][k], dp[i-2][k] + coin[i])
+    else:
+        pass
 
-def dfs(i, dp, ones):
-    global ans
-
-    if i == n + 1:
-        ans = max(ans, dp[n])
-        return
-
-    if i == n - 1 and ones[i-2] == 3 and ones[i-1] == 3:
-        return
-
-    for j in range(1, 3):
-        if ones[i - j] == 3:
-            if j == 1:
-                continue
-        else:
-            dp[i] = dp[i - j] + coin[i]
-            ones[i] = ones[i-j]
-            if j == 1:
-                ones[i] += 1
-            dfs(i + 1, dp, ones)
-            dp[i] = 0
-            ones[i] = 0
-            dfs(i + 1, dp, ones)
-
-dfs(2, dp, ones)
-print(ans)
+ans = max(dp[n])
+print(ans if ans != NEG else -1)
