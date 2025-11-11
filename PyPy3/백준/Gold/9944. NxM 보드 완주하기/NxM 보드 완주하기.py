@@ -26,16 +26,14 @@ while True:
 
         def visit(r, c, dr, dc, visited):
             a = 0
-            marked = 0
             nr, nc = r, c
             while True:
                 a += 1
                 nr, nc = r + (dr * a), c + (dc * a)
                 if can_go(nr, nc, visited):
                     visited[nr][nc] = 1
-                    marked += 1
                 else:
-                    return nr - dr, nc - dc, marked
+                    return nr - dr, nc - dc, a - 1
 
         def dfs(r, c, steps, visited, visited_cnt):
             global ans
