@@ -9,10 +9,7 @@ while True:
 
         for r in range(n):
             for c in range(m):
-                if grid[r][c] == '*':
-                    grid[r][c] = 1
-                else:
-                    grid[r][c] = 0
+                if grid[r][c] != '*':
                     starts.append((r, c))
                     to_visit += 1
 
@@ -25,7 +22,7 @@ while True:
             return 0 <= r < n and 0 <= c < m
 
         def can_go(r, c, visited):
-            return in_range(r, c) and not visited[r][c] and not grid[r][c]
+            return in_range(r, c) and not visited[r][c] and grid[r][c] != '*'
 
         def visit(r, c, dr, dc, visited):
             a = 0
