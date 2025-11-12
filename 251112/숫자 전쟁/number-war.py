@@ -10,4 +10,8 @@ for i in range(1, n+1):
         else:                                   # lose, draw
             dp[i][j] = 0
 
-print(max(map(max, dp)))
+
+ans = 0
+for i in range(1, n+1):
+    ans = max(ans, dp[i][n])
+print(ans)
