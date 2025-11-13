@@ -1,100 +1,88 @@
-n, m, q = map(int, input().split())
-ocean = [[0] * (m + 1) for _ in range(n + 1)]
-sharks = []
-# r, c, speed, direction, size
-for _ in range(q):
-    r, c, speed, dir, size = tuple(map(int, input().split()))
-    shark = (r, c, speed, dir, size)
-    sharks.append(shark)
-    ocean[r][c] = shark
+import sys
+input = sys.stdin.readline
 
-ans = 0
+DIRECTIONS = [(-1, 0), (1, 0), (0, 1), (0, -1)]  # 위, 아래, 오른쪽, 왼쪽
 
-def in_range(r, c):
-    return 1 <= r <= n and 1 <= c <= m
+def move_shark():
+    new_fishing_spot = [[-1] * C for _ in range(R)]
 
-def catch_shark(idx):
-    for row in range(1, n + 1):
-        if ocean[row][idx] != 0:
-            value = ocean[row][idx][4]
-            caught_shark = ocean[row][idx]
-            ocean[row][idx] = 0
+    for m in range(M):
+        if dead_sharks[m]:
+            continue
 
-            if caught_shark in sharks:
-                sharks.remove(caught_shark)
+        shark_r, shark_c, shark_s, shark_d, shark_z = sharks_info[m]
 
-            return value
+        if shark_d in (0, 1):  # 세로 이동
+            
+            dr = DIRECTIONS[shark_d][0]
+            nr = (shark_r + dr * shark_s) % R2
+            if nr > R - 1:
+                nr = R2 - nr
+                shark_d ^= 1  # 0<->1 반전
+
+            nc = shark_c  # 열은 그대로
+
+        else:              # 가로 이동
+            if C2:  # C > 1
+                dc = DIRECTIONS[shark_d][1]
+                nc = (shark_c + dc * shark_s) % C2
+                if nc > C - 1:
+                    nc = C2 - nc
+                    # 2<->3 반전: 2 + ((d-2) ^ 1)
+                    shark_d = 2 + ((shark_d - 2) ^ 1)
+            else:
+                nc = 0  # C==1이면 열은 고정
+            nr = shark_r  # 행은 그대로
+
+        shark_r, shark_c = nr, nc
+        sharks_info[m][0], sharks_info[m][1], sharks_info[m][3] = shark_r, shark_c, shark_d
+
+        # 충돌 처리 (큰 상어만 생존)
+        if new_fishing_spot[shark_r][shark_c] == -1:
+            new_fishing_spot[shark_r][shark_c] = m
+        else:
+            other = new_fishing_spot[shark_r][shark_c]
+            if shark_z > sharks_info[other][4]:
+                new_fishing_spot[shark_r][shark_c] = m
+                dead_sharks[other] = True
+            else:
+                dead_sharks[m] = True
+
+    return new_fishing_spot
+
+
+def fishing (y):
+    x = 0
+
+    while x < R:
+        if fishing_spot[x][y] >= 0:
+            sharks_num = fishing_spot[x][y]
+            dead_sharks[sharks_num] = True
+            return sharks_info[sharks_num][4]
+        x += 1
+
     return 0
 
-drs, dcs = [0, -1, 1, 0, 0], [0, 0, 0, 1, -1]
 
-def change_dir(dir):
-    if dir == 1:
-        return 2
-    elif dir == 2:
-        return 1
-    elif dir == 3:
-        return 4
-    else:
-        return 3
+R, C, M = map(int, input().split())  # R: 행, C: 열, M: 상어의 수
+fishing_spot = [[-1] * C for _ in range(R)]  # 상어의 인덱스 번호를 담을 배열
+sharks_info = []   # (r, c): 상어의 위치, s: 속도, d: 진행 방향, z: 사이즈
+R2 = 2 * (R - 1)
+C2 = 2 * (C - 1)
 
-def move(shark):
-    r, c, speed, dir, size = shark
+dead_sharks = [False] * M
+for i in range(M):
+    r, c, s, d, z = map(int, input().split())
+    sharks_info.append([r-1, c-1, s, d-1, z])
+    fishing_spot[r-1][c-1] = i
 
-    if dir == 1 or dir == 2: 
-        cycle = (n - 1) * 2
-        if cycle != 0:
-            s = speed % cycle
-        else:
-            s = 0
-    else:  
-        cycle = (m - 1) * 2
-        if cycle != 0:
-            s = speed % cycle
-        else:
-            s = 0
+total_size = 0
+fishman_loc = 0
 
-    dr, dc = drs[dir], dcs[dir]
+while fishman_loc < C:
+    total_size += fishing(fishman_loc)
+    fishing_spot = move_shark()
+    fishman_loc += 1
 
-    for _ in range(s):
-        nr, nc = r + dr, c + dc
-        if in_range(nr, nc):
-            r, c = nr, nc
-        else:
-            dir = change_dir(dir)
-            dr, dc = drs[dir], dcs[dir]
-            r, c = r + dr, c + dc
+print(total_size)
 
-    return (r, c, speed, dir, size)
-
-def sharks_move():
-    global ocean, sharks
-    new_ocean = [[0] * (m + 1) for _ in range(n + 1)]
-
-    for shark in sharks:
-        nr, nc, s, d, z = move(shark)
-
-        if new_ocean[nr][nc] == 0:
-            new_ocean[nr][nc] = (nr, nc, s, d, z)
-        else:
-            if new_ocean[nr][nc][4] < z:
-                new_ocean[nr][nc] = (nr, nc, s, d, z)
-
-    new_sharks = []
-    for r in range(1, n + 1):
-        for c in range(1, m + 1):
-            if new_ocean[r][c] != 0:
-                new_sharks.append(new_ocean[r][c])
-
-    sharks = new_sharks
-    ocean = [row[:] for row in new_ocean]
-
-for idx in range(1, m + 1):
-    # print("=======")
-    # for row in ocean:
-    #     print(*row)
-
-    ans += catch_shark(idx)
-    sharks_move()
-
-print(ans)
