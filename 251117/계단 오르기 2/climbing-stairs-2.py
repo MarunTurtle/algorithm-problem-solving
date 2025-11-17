@@ -1,6 +1,6 @@
 n = int(input())
 coins = [0] + list(map(int, input().split()))
-dp = [[0] * (n + 1) for _ in range(4)]
+dp = [[0] * 4 for _ in range(n + 1)]
 
 dp[1][1] = coins[1]
 if n > 1:
