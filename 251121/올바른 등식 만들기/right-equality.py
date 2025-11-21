@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(10**7)
+
 N, M = map(int, input().split())
 nums = list(map(int, input().split()))
 
