@@ -14,7 +14,8 @@ def dfs(idx, value):
     if value > 20 or value < -20:
         return
     
-    if value + sum(nums[idx:]) == 0:
+    if sum(nums[idx:]) == 0:
+        ans = 2**len(nums)
         return
 
     if visited[idx] == 0:
