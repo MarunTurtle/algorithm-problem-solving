@@ -6,7 +6,6 @@ ans = 0
 
 def dfs(idx, value):
     global ans
-    # print(f"idx: {idx} || value: {value} || {visited}")
     if idx == N:
         if value == M:
             ans += 1 
@@ -15,6 +14,9 @@ def dfs(idx, value):
     if value > 20 or value < -20:
         return
     
+    if value + sum(nums[idx:]) == 0:
+        return
+
     if visited[idx] == 0:
         visited[idx] = 1
         dfs(idx + 1, value + nums[idx])
