@@ -7,6 +7,12 @@ n = int(input())
 students = [list(map(int, input().split())) for _ in range(n)]
 
 combos = list(combinations(students, 20))
+new_combos = []
+for combo in combos:
+    new_combo = sorted(list(combo))
+    if new_combo not in new_combos:
+        new_combos.append(new_combo)
+
 max_sum = 0
 
 for combo in combos:
