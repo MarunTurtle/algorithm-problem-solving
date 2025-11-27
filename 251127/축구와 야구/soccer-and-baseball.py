@@ -6,7 +6,7 @@ INT_MIN = -sys.maxsize
 n = int(input())
 students = [list(map(int, input().split())) for _ in range(n)]
 
-students.sort(key=lambda x: (x[0] + x[1]))
+students.sort(key=lambda x: (x[0], x[1]))
 
 combo = students[:20]
 
