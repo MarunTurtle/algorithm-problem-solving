@@ -9,7 +9,7 @@ students = [list(map(int, input().split())) for _ in range(n)]
 combos = list(combinations(students, 20))
 new_combos = []
 for combo in combos:
-    new_combo = sorted(list(combo))
+    new_combo = list(combo).sort(key= lambda x : (x[0], x[1]))
     if new_combo not in new_combos:
         new_combos.append(new_combo)
 
@@ -29,10 +29,7 @@ for combo in combos:
                         dp[r+1][i+1][j] = max(dp[r+1][i+1][j], dp[r][i][j] + combo[r][0])
                     if j+1 < 10:
                         dp[r+1][i][j+1] = max(dp[r+1][i][j+1], dp[r][i][j] + combo[r][1])
-        # if r > 18:
-        #     for row in dp[r+1]:
-        #         print(*row)
-        #     print("======")
+
     max_sum = max(max_sum, dp[20][11][9])
 
 print(max_sum)
