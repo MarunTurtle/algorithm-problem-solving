@@ -4,7 +4,7 @@ n, m = map(int, input().split())
 clothes = [tuple(map(int, input().split())) for _ in range(n)]
 clothes.sort(key=lambda x:(x[0], x[1]))
 
-dp = [[0] * (n + 1) for _ in range(m + 1)]
+dp = [[-1] * (n + 1) for _ in range(m + 1)]
 
 for i, cloth in enumerate(clothes):
     s, e, v = cloth
@@ -13,11 +13,11 @@ for i, cloth in enumerate(clothes):
 
 for i in range(2, m+1):
     for j in range(1, n+1):
-        if dp[i-1][j] != 0:
+        if dp[i-1][j] != -1:
             for cloth in clothes:
                 s, e, v = cloth
                 if s <= i and i <= e:        
-                    if dp[i][j] == 0:
+                    if dp[i][j] == -1:
                         dp[i][j] = v    
                     else:
                         diff = abs(dp[i-1][j] - dp[i][j])   
