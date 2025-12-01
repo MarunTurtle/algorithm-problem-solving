@@ -2,8 +2,10 @@
 n, m = map(int, input().split())
 # start, end, value
 clothes = [tuple(map(int, input().split())) for _ in range(n)]
+clothes.sort(key=lambda x:(x[0], x[1]))
 
 dp = [[0] * (n + 1) for _ in range(m + 1)]
+
 for i, cloth in enumerate(clothes):
     s, e, v = cloth
     if s <= 1 and 1 <= e:
@@ -26,7 +28,10 @@ ans = 0
 for c in range(1, n+1):
     res = 0
     for r in range(2, m+1):
-        res += abs(dp[r-1][c] - dp[r][c])
+        res += abs(dp[r][c] - dp[r-1][c])
     ans = max(res, ans)
 
 print(ans)
+
+for row in dp:
+    print(*row)
