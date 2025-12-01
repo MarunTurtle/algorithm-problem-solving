@@ -33,5 +33,5 @@ for c in range(1, n+1):
 
 print(ans)
 
-for row in dp:
-    print(*row)
+# for row in dp:
+#     print(*row)
