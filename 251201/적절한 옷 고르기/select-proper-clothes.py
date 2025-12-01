@@ -19,7 +19,7 @@ for i in range(2, m+1):
                         dp[i][j] = v    
                     else:
                         diff = abs(dp[i-1][j] - dp[i][j])   
-                        if diff < abs(v - dp[i-1][j]):
+                        if diff <= abs(v - dp[i-1][j]):
                             dp[i][j] = v
 
 ans = 0
